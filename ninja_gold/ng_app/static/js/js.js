@@ -1,4 +1,5 @@
 var modal = document.getElementById("myModal");
+
 window.onload = function () {
     var views = Cookies.get('modal')
     if (views == null) {
@@ -12,19 +13,31 @@ var winning_amount = parseInt($('.winning_amount').attr("value"));
 
 if (moves < 0){
     var cheater = document.getElementById("cheater");
-    cheater.style.display = "block"
+    window.onload = function(){
+        cheater.style.display = "block"
+    }
 }
-if (moves == 0 && gold < 0) {
+
+else if (moves == 0 && winning_amount < 0 && gold <= winning_amount){
+    var pauper = document.getElementById("pauper");
+    window.onload = function(){
+        pauper.style.display = "block"
+    }
+}
+
+else if (moves == 0 && gold < 0) {
     var bankrupt = document.getElementById("bankrupt");
     window.onload = function () {
         bankrupt.style.display = "block"
     }
-} else if (moves == 0 && gold < winning_amount) {
+
+} else if (moves == 0 && gold <= winning_amount) {
     var loser = document.getElementById("loser");
     window.onload = function () {
         loser.style.display = "block"
     }
-} else if (moves == 0 && gold >= winning_amount) {
+
+} else if (moves == 0 && gold >= winning_amount && winning_amount > 0) {
     var winner = document.getElementById("winner");
     window.onload = function () {
         winner.style.display = "block"
