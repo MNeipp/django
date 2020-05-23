@@ -43,6 +43,12 @@ else if (moves == 0 && gold < 0) {
         winner.style.display = "block"
     }
 }
+ else if (moves == 0 && gold >= winning_amount && winning_amount < 0) {
+    var lazy = document.getElementById("lazy");
+    window.onload = function () {
+        lazy.style.display = "block"
+    }
+}
 
 $(".new_game").click(function () {
     Cookies.set("modal", "viewed");
