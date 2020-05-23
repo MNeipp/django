@@ -8,7 +8,7 @@ def index(request):
     date = strftime("%B %d, %Y", localtime())
     time = strftime("%I:%M:%S %p", localtime())
     if 'moves' not in request.session:
-        request.session['moves'] = 0
+        request.session['moves'] = 1
     if 'gold' not in request.session:
         request.session['gold'] = 0
     if 'activity' not in request.session:
