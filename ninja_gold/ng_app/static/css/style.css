@@ -1,0 +1,145 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+#wrapper{
+    height:100vh;
+    padding:20px;
+    background-color: black;
+
+}
+div.my_gold{
+    color:whitesmoke;
+    margin-bottom:20px;
+}
+form.game_board{
+    display:flex;
+    justify-content: space-around;
+    margin-bottom: 30px;
+}
+div.card{
+    display:inline-block;
+    width:20%;
+    height:200px;
+    padding:10px;
+    border-radius: 10px;
+    text-align:center;
+}
+div.card p {
+    font-weight: bold;
+}
+div.farm{
+    background-image:radial-gradient(#47ba3b,#168f09);
+    border:1px solid #085800;
+    box-shadow:inset 0px 1px 0px 0px #82cf7a;
+
+}
+div.cave{
+    background-image:radial-gradient(#2c8b84,#076c64);
+    border:1px solid #00423d;
+    box-shadow:inset 0px 1px 0px 0px #81c2be;
+
+}
+div.house{
+    background-image:radial-gradient(#d46c1c,#af520b);
+    border:1px solid #6b2f00;
+    box-shadow:inset 0px 1px 0px 0px #f8a75a;
+
+}
+div.casino{
+    background-image:radial-gradient(#df474f,#ac0b13);
+    border:1px solid #690005;
+    box-shadow:inset 0px 1px 0px 0px #ff858b;
+
+}
+label{
+    color:whitesmoke;
+}
+textarea{
+    width:96.5%;
+    margin-left:20px;
+    resize: none;
+}
+
+h3{
+    margin-top: 40px;
+}
+
+h2{
+ align-self: center;
+}
+
+div.card p{
+    margin-top:10px;
+    margin-bottom:15px;
+}
+
+.myButton {
+	box-shadow:inset 0px 1px 0px 0px #fff6af;
+	background:linear-gradient(to bottom, #ffec64 5%, #ffab23 100%);
+	background-color:#ffec64;
+	border-radius:6px;
+	border:1px solid #ffaa22;
+	display:inline-block;
+	cursor:pointer;
+	color:#333333;
+	font-family:Arial;
+	font-size:16px;
+	font-weight:bold;
+	padding:8px 24px;
+	text-decoration:none;
+
+}
+.myButton:hover {
+	background:linear-gradient(to bottom, #ffab23 5%, #ffec64 100%);
+	background-color:#ffab23;
+}
+.myButton:active {
+	position:relative;
+	top:1px;
+}
+
+form.new_game label{
+    color:black;
+}
+
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+
+.modal-content {
+    background-color: #fefefe;
+    display:block;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    border-radius: 6px;
+    width: 80%; /* Could be more or less, depending on screen size */
+
+  }
+form.new_game, div.try_again{
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+a.try_again{
+    flex-grow:0;
+    margin-top: 10px;
+    align-self:center;
+}
+input.new_game{
+    flex-grow:0;
+    align-self:center;
+}
