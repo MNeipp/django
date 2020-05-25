@@ -51,9 +51,9 @@
             <form class="new_game" action="/start_game/" method="post">
                 {% csrf_token %}
                 <label for="moves">How many turns would you like?</label>
-                <input type="text" name="moves" class="set_moves">
+                <input type="text" name="moves" class="set_moves" required>
                 <label for="winning_amount">How much gold do you need to win?</label>
-                <input type="text" name="winning_amount" class="set_amount"><br>
+                <input type="text" name="winning_amount" class="set_amount" required><br>
                 <input class="new_game myButton" type="submit" name="new_game" value="Start Game">
             </form>
         </div>
