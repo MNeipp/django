@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class Registration</title>
+</head>
+<body>
+    <div id="wrapper">
+        <div class="classes">
+            <h2 style="text-decoration: underline; display:inline-block">Classes</h2>
+            <table>
+                <tr>
+                    <th>Subject</th>
+                </tr>
+            </table>
+            <form action="create_subject/" method="POST">
+                {% csrf_token %}
+                <label for="subject_description">Description</label>
+                <textarea name="desc" id="subject_description" cols="30" rows="5" placeholder="class description" style="resize:none" required></textarea>
+                <br>
+                <label for="subject_name">Subject Name</label>
+                <input type="text" name="name" id="subject_name" placeholder="Biology" required>
+                <input type="submit" value="Create Subject">
+            </form>
+        </div>
+        <div class="students">
+            <h2 style="text-decoration: underline; display:inline-block">Students</h2>
+            <table>
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Grade</th>
+                </tr>
+            </table>
+        </div>
+        <div class="teachers">
+            <h2 style="text-decoration: underline; display:inline-block">Teachers</h2>
+            <table>
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Average Rating</th>
+                </tr>
+            </table>
+                <form action="hire_teacher/" method="POST">
+                    {% csrf_token %}
+                <label for="first_name">First Name</label>
+                <input type="text" name="first_name" id="first_name" placeholder="John" required>
+                <br>
+                <label for="last_name">Last Name</label>
+                <input type="text" name="last_name" id="last_name" placeholder="Smith" required>
+                <br>
+                <input type="submit" value="Hire Teacher">
+                </form>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subjects</title>
+</head>
+<body>
+    <div id="wrapper">
+        <h1>Subject: {{subject.name}}</h1>
+        <h3>Subject Description:</h3>
+        <p>{{subject.desc}}</p>
+        <h2>Instructors:</h2>
+        <ul>
+            {% for teacher in subject.all_teachers.all %}
+            <li>{{teacher.first_name}} {{teacher.last_name}}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    
+</body>
+</html>

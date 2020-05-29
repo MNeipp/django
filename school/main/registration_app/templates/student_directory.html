@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hellions</title>
+</head>
+<body>
+    <div id="wrapper">
+        <h1>Student Directory</h1>
+        <table>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Grade</th>
+            </tr>
+            {% for student in students %}
+            <tr>
+                <td>{{student.first_name}}</td>
+                <td>{{student.last_name}}</td>
+                <td>{{student.grade}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        <br>
+        <form action="/register_student/" method="POST">
+            {% csrf_token %}
+        <label for="first_name">First Name</label>
+        <input type="text" name="first_name" id="first_name" placeholder="John" required>
+        <br>
+        <label for="last_name">Last Name</label>
+        <input type="text" name="last_name" id="last_name" placeholder="Smith" required>
+        <br>
+        <label for="grade">Grade</label>
+        <input type="number" name="grade" id="grade" min="9" max="12" placeholder="9-12" required>
+        <br>
+        <input type="submit" value="Register Student">
+        </form>
+    </div>
+</body>
+</html>

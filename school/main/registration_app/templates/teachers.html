@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slave-drivers</title>
+</head>
+<body>
+    <div id="wrapper">
+        <h2>Teacher: {{teacher.first_name}} {{teacher.last_name}}</h2>
+        <h3>Teacher Rating:</h3>
+        <h3>Subjects taught</h3>
+        <ol>
+            {% for subjects in teacher.subjects.all%}
+            <li>subjects.name</li>
+        </ol>
+            {% endfor %}
+    </div>
+</body>
+</html>
