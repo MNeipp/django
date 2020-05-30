@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subject Catalog</title>
+</head>
+<body>
+    <div id="wrapper">
+        <h1>Available subjects</h1>
+
+         <ul>
+             <h3>Subject Name</h3>
+             {% for subject in subjects%}    
+                 <li><a href="{{subject.id}}">{{subject.name}}</a></li>   
+             {% endfor %}
+         </ul>
+
+        <br>
+        <form action="/create_subject/" method="POST">
+            {% csrf_token %}
+            <label for="subject_name">Subject Name</label>
+            <input type="text" name="name" id="subject_name" placeholder="Biology" required>
+            <br>
+            <br>
+            <label for="subject_description">Description</label>
+            <textarea name="desc" id="subject_description" cols="30" rows="5" placeholder="class description" style="resize:none" required></textarea>
+            <input type="submit" value="Create Subject">
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Torturers</title>
+</head>
+<body>
+    <div id="wrapper">
+        <h1>Teacher Directory</h1>
+    </div>
+    <table>
+        <tr>
+            <th>Last Name</th>
+            <th>First Name</th>
+        </tr>
+        {% for teacher in teachers|dictsort:"last_name" %}
+        <tr>
+            <td><a href="{{teacher.id}}">{{teacher.last_name}}</a></td>
+            <td><a href="{{teacher.id}}">{{teacher.first_name}}</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+    <br>
+    <br>
+    <form action="/hire_teacher/" method="POST">
+        {% csrf_token %}
+    <label for="first_name">First Name</label>
+    <input type="text" name="first_name" id="first_name" placeholder="John" required>
+    <br>
+    <label for="last_name">Last Name</label>
+    <input type="text" name="last_name" id="last_name" placeholder="Smith" required>
+    <br>
+    <input type="submit" value="Hire Teacher">
+    </form>
+</body>
+</html>

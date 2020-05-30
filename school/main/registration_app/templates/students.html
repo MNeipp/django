@@ -9,16 +9,32 @@
     <div id="wrapper">
         <h2>Student: {{student.first_name}} {{student.last_name}}</h2>
         <h3>Grade: {{student.grade}}</h3>
-        <h3>Subjects:</h3>
+        <h3>Student ID: {{student.id}}</h3>
         <table>
             <tr>
                 <th>Subject</th>
                 <th>Teacher</th>
             </tr>
-        </table>
+            {% for subject in student.subjects.all%}
+            <tr>
+                <td>{{subject.name}}</td>
+                <td>Mr.Placeholder</td>
+            </tr>
+            {% endfor %}
         <br>
-
+        </table>
+        <form action='/students/register_subject/{{student.id}}' method="POST">
+            {% csrf_token %}
+            <input type="submit" value="Register Subject">
+            <select name="register_subject" id="register_subject" required>
+                {% for subject in not_subjects %}
+                <option value="{{subject.id}}">{{subject.name}}</option>
+                {% endfor %}
+            </select>
+        </form>
+        
     </div>
+
     
 </body>
 </html>

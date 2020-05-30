@@ -8,13 +8,31 @@
 <body>
     <div id="wrapper">
         <h2>Teacher: {{teacher.first_name}} {{teacher.last_name}}</h2>
-        <h3>Teacher Rating:</h3>
+        <h3>Teacher Rating: {{rating}}</h3>
         <h3>Subjects taught</h3>
-        <ol>
-            {% for subjects in teacher.subjects.all%}
-            <li>subjects.name</li>
-        </ol>
+        <ul>
+            {% for subjects in teacher.subjects.all|dictsort:"name"%}
+            <li><a href="/subjects/{{subjects.id}}">{{subjects.name}}</a></li>
             {% endfor %}
+        </ul>
+        <br>
+        <form action="/rate_teacher/{{teacher.id}}" method="POST">
+            {% csrf_token %}
+            <label for="rating">Rate this teacher</label>
+            <input type="number" name="rating" id="rating" min="1" max="10" placeholder="1-10" required>
+            <br>
+            <input type="submit" value="Submit Rating">
+        </form>
+        <form action="/teachers/add_subject/{{teacher.id}}" method="POST">
+            {% csrf_token %}
+            <input type="submit" value="Add Subject">
+            <select name="subject" id="subject">
+                {% for subject in not_subjects %}
+                <option value="{{subject.id}}">{{subject.name}}</option>
+                {% endfor %}
+            </select>
+            
+        </form>
     </div>
 </body>
 </html>

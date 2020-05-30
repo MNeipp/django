@@ -10,12 +10,31 @@
         <h1>Subject: {{subject.name}}</h1>
         <h3>Subject Description:</h3>
         <p>{{subject.desc}}</p>
-        <h2>Instructors:</h2>
-        <ul>
-            {% for teacher in subject.all_teachers.all %}
-            <li>{{teacher.first_name}} {{teacher.last_name}}</li>
+        <h2>Teachers:</h2>
+        <table>
+            <tr>
+                <th>Last Name</th>
+                <th>First Name</th>
+            </tr>
+            {% for teacher in subject.all_teachers.all|dictsort:"last_name" %}
+            <tr>
+                <td><a href="/teachers/{{teacher.id}}">{{teacher.last_name}}</a></td>
+                <td><a href="/teachers/{{teacher.id}}"> {{teacher.first_name}}</a></td>
+            </tr>
             {% endfor %}
-        </ul>
+        </table>
+        
+        <form action="add_teacher/{{subject.id}}" method="POST">
+            {% csrf_token %}
+            <input type="submit" value="Add Teacher">
+
+            <select name="teacher" id="add_teacher">
+                {% for teacher in not_teachers %}
+                <option value="{{teacher.id}}">{{teacher.last_name}}</option>
+                {% endfor %}
+            </select>
+
+        </form>
     </div>
     
 </body>
