@@ -3,38 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.0/cerulean/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-b+jboW/YIpW2ZZYyYdXczKK6igHlnkPNfN9kYAbqYV7rNQ9PKTXlS2D6j1QZIATW" crossorigin="anonymous">
     <title>Hellions</title>
 </head>
 <body>
-    <div id="wrapper">
+    <div class="container">
         <h1>Student Directory</h1>
-        <table>
-            <tr>
-                <th>Last Name</th>
-                <th>First Name</th>
-                <th>Grade</th>
-            </tr>
-            {% for student in students|dictsort:"last_name" %}
-            <tr>
-                <td><a href="{{student.id}}">{{student.last_name}}</a></td>
-                <td><a href="{{student.id}}">{{student.first_name}}</a></td>
-                <td>{{student.grade}}</td>
-            </tr>
-            {% endfor %}
+        <table class='table table-bordered table-striped'>
+            <thead>
+                <tr>
+                    <th>Last Name</th>
+                    <th>First Name</th>
+                    <th>Grade</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for student in students|dictsort:"last_name" %}
+                <tr>
+                    <td><a href="{{student.id}}">{{student.last_name}}</a></td>
+                    <td><a href="{{student.id}}">{{student.first_name}}</a></td>
+                    <td>{{student.grade}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
         </table>
         <br>
         <form action="/enroll_student/" method="POST">
             {% csrf_token %}
-        <label for="first_name">First Name</label>
-        <input type="text" name="first_name" id="first_name" placeholder="John" required>
-        <br>
-        <label for="last_name">Last Name</label>
-        <input type="text" name="last_name" id="last_name" placeholder="Smith" required>
-        <br>
-        <label for="grade">Grade</label>
-        <input type="number" name="grade" id="grade" min="9" max="12" placeholder="9-12" required>
-        <br>
-        <input type="submit" value="Enroll Student">
+            <div class="form-group row">
+                <label for="first_name" class="col-sm-2 col-form-label">First Name</label>
+                <input type="text" class="form-control col-sm-4" name="first_name" id="first_name" placeholder="eg. John" required>
+            </div>
+            <div class="form-group row">
+                <label for="last_name" class= "col-sm-2 col-form-label">Last Name</label>
+                <input type="text" class="form-control col-sm-4" name="last_name" id="last_name" placeholder="eg. Smith" required>
+            </div>
+            <div class="form-group row">
+                <label for="grade" class= "col-sm-2 col-form-label">Grade</label>
+                <input type="number" class="form-control col-sm-4" name="grade" id="grade" min="9" max="12" placeholder="9-12" required>
+            </div>
+            <button type="submit" class="btn btn-primary mb-3">Enroll Student</button>
         </form>
     </div>
 </body>

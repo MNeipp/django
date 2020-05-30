@@ -1,29 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.0/cerulean/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-b+jboW/YIpW2ZZYyYdXczKK6igHlnkPNfN9kYAbqYV7rNQ9PKTXlS2D6j1QZIATW" crossorigin="anonymous">
     <title>Class Registration</title>
 </head>
-<body>
-    
-    <div id="wrapper">
-        <div class="hero">
-            <h1>Greendale High</h1>
-            <h2>Not just a school, a community</h2>
+
+<body >
+
+    <div class="container-fluid">
+        <div class="jumbotron bg-dark mt-2">
+            <h1 class="display-2">Greendale High</h1>
+            <p class="lead text-white">Not just a school, a<em> community</em></p>
         </div>
-        <div class="card subjects">
-            <h2 style="text-decoration: underline; display:inline-block"> <a href="subjects">Subjects Taught</a></h2>
-            <h3>{{total_subjects}}</h3>
-        </div>
-        <div class="card students">
-            <h2 style="text-decoration: underline; display:inline-block"><a href="students">Students Enrolled</a></h2>
-            <h3>{{total_students}}</h3>
-        </div>
-        <div class="card teachers">
-            <h2 style="text-decoration: underline; display:inline-block"><a href="teachers">Teachers Employed</a></h2>
-            <h3>{{total_teachers}}</h3>
+        <div class="row justify-content-around">
+            <div class="col">
+                <a href="subjects" class="text-white text-decoration-none">
+                    <div class="card bg-danger border-danger" style="height:10rem;">
+                        <h2 class="card-header text-center">Subjects Taught</h2>
+                        <div class="card-body text-center">
+                            <h1>{{total_subjects}}</h1>
+                        </div>
+                    </div>
+                </a>
+                </div>
+            <div class="col">
+                <a href="students" class="text-white text-decoration-none">
+                    <div class="card bg-success border-success" style="height:10rem;">
+                        <h2 class="card-header text-center">Students Enrolled</h2>
+                        <div class="card-body text-center">
+                            <h1>{{total_students}}</h1>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col">
+                <a href="teachers" class="text-white text-decoration-none">
+                    <div class="card border-warning bg-warning" style="height:10rem;">
+                        <h2 class="card-header text-center">Teachers Employed</h2>
+                        <div class="card-body text-center">
+                            <h1>{{total_teachers}}</h1> 
+                        </div>
+                    </div>
+                </a>
+            </div>
         </div>
     </div>
 </body>
+
 </html>

@@ -3,10 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.0/cerulean/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-b+jboW/YIpW2ZZYyYdXczKK6igHlnkPNfN9kYAbqYV7rNQ9PKTXlS2D6j1QZIATW" crossorigin="anonymous">
     <title>Slave-drivers</title>
 </head>
 <body>
-    <div id="wrapper">
+    <div class="container">
         <h2>Teacher: {{teacher.first_name}} {{teacher.last_name}}</h2>
         <h3>Teacher Rating: {{rating}}</h3>
         <h3>Subjects taught</h3>
@@ -18,19 +20,24 @@
         <br>
         <form action="/rate_teacher/{{teacher.id}}" method="POST">
             {% csrf_token %}
+        <div class="form-group">
             <label for="rating">Rate this teacher</label>
-            <input type="number" name="rating" id="rating" min="1" max="10" placeholder="1-10" required>
-            <br>
-            <input type="submit" value="Submit Rating">
+            <div class="form-group row">  
+                <button class="btn btn-primary mr-2 ml-3" type="submit">Submit Rating</button>
+                <input class="form-control col-sm-1"type="number" name="rating" id="rating" min="1" max="10" placeholder="1-10" required>
+            </div>
         </form>
+        </div>
         <form action="/teachers/add_subject/{{teacher.id}}" method="POST">
             {% csrf_token %}
-            <input type="submit" value="Add Subject">
-            <select name="subject" id="subject">
-                {% for subject in not_subjects %}
-                <option value="{{subject.id}}">{{subject.name}}</option>
-                {% endfor %}
-            </select>
+            <div class="form-group row">
+                <button class="btn btn-primary mr-2 ml-3" type="submit">Add Subject</button>
+                <select class="form-control col-sm-2" name="subject" id="subject">
+                    {% for subject in not_subjects %}
+                    <option value="{{subject.id}}">{{subject.name}}</option>
+                    {% endfor %}
+                </select>
+            </div>
             
         </form>
     </div>
