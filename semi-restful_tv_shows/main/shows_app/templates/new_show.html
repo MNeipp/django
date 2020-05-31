@@ -12,34 +12,36 @@
 <body>
     <div class="container col-sm-8">
         <div class="row">
-            <h1 class="my-4 col-10 d-inline">Add a New Show</h1>
-            <a href="/shows/" class='col  text-info'>Go Back</a>
+            <h1 class="my-4 col-10 d-inline">{{header}}</h1>
+            <a href="/shows" class='col  text-info'>Go Back</a>
         </div>
-        <form action="create_show/" method="POST">
+        <form action="process/" method="POST">
             {% csrf_token %}
             <div class="form-group">
                 <label for="title" class="col-form-label">Title</label>
-                <input type="text" class="form-control" name="title" id="title" required>
+                <input type="text" class="form-control" name="title" id="title" value="{{show.title}}" required>
             </div>
             <div class="row">
                 <div class="col">
                     <label for="network" class="col-form-label">Network</label>
-                    <input type="text" class="form-control col" name="network" id="network" required>
+                    <input type="text" class="form-control col" name="network" id="network" value="{{show.network.name}}" required>
                 </div>
                 <div class="col">
                     <label for="release_date" class="col-form-label">Release Date</label>
-                    <input type="date" class="form-control col" name="release_date" id="release_date" required>
+                    <input type="date" class="form-control col" name="release_date" id="release date" value="{{show.release_date| date:'Y-m-d'}}" required>
                 </div>
             </div>
             <div class="form-group mt-3">
                 <label for="desc" class="col-form-label">Description</label>
-                <textarea name="desc" id="desc" class="form-control col" rows="3"  style="resize: none" required></textarea>
+                <textarea name="desc" id="desc" class="form-control col" rows="3"  style="resize: none" required>{{show.desc}}</textarea>
             </div>
             <div class="row justify-content-center">
-                <button type="submit" class="btn btn-primary">Create</button>
+                <button type="submit" class="btn btn-primary">Update</button>
             </div>
-
         </form>
+        <div class="row justify-content-center">
+            <a href="/shows/{{show.id}}" class="text-info mt-3">Got to show</a>
+        </div>
     </div>
     </div>
 </body>

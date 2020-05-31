@@ -10,7 +10,10 @@ def index(request):
     return render(request, "index.html", context)
 
 def new_show(request):
-    return render(request, "new_show.html")
+    context={
+        "header": "Add a New Show"
+    }
+    return render(request, "new_show.html", context)
 
 def create_show(request):
     if request.method=="POST":
@@ -32,9 +35,10 @@ def show_info(request, show_id):
 
 def edit_show(request, show_id):
     context={
-        "show" : Show.objects.get(id=show_id)
+        "show" : Show.objects.get(id=show_id),
+        "header": f"Edit Show {show_id}"
     }
-    return render(request, "edit_show.html", context)
+    return render(request, "new_show.html", context)
 
 def edit_show_process(request, show_id):
     if request.method=="POST":
