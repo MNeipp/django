@@ -11,7 +11,8 @@ def index(request):
 
 def new_show(request):
     context={
-        "header": "Add a New Show"
+        "header": "Add a New Show",
+        "button": "Create"
     }
     return render(request, "new_show.html", context)
 
@@ -36,7 +37,9 @@ def show_info(request, show_id):
 def edit_show(request, show_id):
     context={
         "show" : Show.objects.get(id=show_id),
-        "header": f"Edit Show {show_id}"
+        "header": f"Edit Show {show_id}",
+        "button": "Update",
+        "show_link": "Go to Show",
     }
     return render(request, "new_show.html", context)
 
