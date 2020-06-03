@@ -9,5 +9,4 @@ urlpatterns =[
     path('<int:show_id>/destroy/', views.delete_show),
     path('new/process/', views.create_show),
     path('<int:show_id>/edit/process/', views.edit_show_process),
-    path('<int:show_id>/destroy/', views.delete_show)
 ]

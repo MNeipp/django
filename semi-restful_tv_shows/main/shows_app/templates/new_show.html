@@ -15,7 +15,14 @@
             <h1 class="my-4 col-10 d-inline">{{header}}</h1>
             <a href="/shows" class='col  text-info'>Go Back</a>
         </div>
-        <form action="process/" method="POST">
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li>{% if message.tags %}  class="{{message.tags}}" {% endif %} {{message}}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        <form action="{{form_url}}" method="POST">
             {% csrf_token %}
             <div class="form-group">
                 <label for="title" class="col-form-label">Title</label>
@@ -33,8 +40,9 @@
             </div>
             <div class="form-group mt-3">
                 <label for="desc" class="col-form-label">Description</label>
-                <textarea name="desc" id="desc" class="form-control col" rows="3"  style="resize: none" required>{{show.desc}}</textarea>
+                <textarea name="desc" id="desc" class="form-control col" rows="3"  style="resize: none">{{show.desc}}</textarea>
             </div>
+            <input type="hidden" name="id" value={{show.id}}>
             <div class="row justify-content-center">
                 <button type="submit" class="btn btn-primary">{{button}}</button>
             </div>
