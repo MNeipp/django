@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.0/minty/bootstrap.min.css" rel="stylesheet" integrity="sha384-HqaYdAE26lgFCJsUF9TBdbZf7ygr9yPHtxtg37JshqVQi6CCAo6Qvwmgc5xclIiV" crossorigin="anonymous">
+    <title>Amadon</title>
+</head>
+<body>
+    <div class="container">
+
+        <h1>Amadon Store!</h1>
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for product in all_products %}
+                <tr>
+                    <form action="/checkout" method="post">
+                        {% csrf_token %}
+                        <td>{{product.description}}</td>
+                        <td><input type="hidden" name="item_id" value="{{product.id}}">{{product.price}}</td>
+                        <td><select name="quantity" class="custom-select">
+                            <option value="1">1</option>              
+                            <option value="2">2</option>              
+                            <option value="3">3</option>              
+                        </select></td>
+                        <td class="text-center"><input type="submit" value="Buy!" class="btn btn-primary"></td>
+                    </form>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
