@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.0/cerulean/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-b+jboW/YIpW2ZZYyYdXczKK6igHlnkPNfN9kYAbqYV7rNQ9PKTXlS2D6j1QZIATW" crossorigin="anonymous">
+    <title>Course Comments</title>
+</head>
+<body>
+    <div class="container">
+        <h2>Course: {{course.name}}</h2>
+        <h3>Description: {{course.description.desc}}</h3>
+        {% for comment in course.comments.all|dictsortreversed:"created_at" %}
+        <div class="card text-white bg-dark mb-3" style="max-width: 20rem;">
+            <p class="lead mt-1">{{comment.text}}</p>
+            <p><small>Submitted on {{comment.created_at}}</small></p>
+        </div>
+        {% endfor %}
+        <form action="/course/comments/{{course.id}}/add/" method="POST">
+            {% csrf_token %}
+            <h4>Add Comment</h4>
+            <textarea name="comment" id="" cols="30" rows="5" class="form-control col-sm-3" placeholder="Comments" style="resize: none;"></textarea>
+            <button type="submit" class="btn btn-primary my-2">Add Comment</button>
+        </form>
+    </div>
+    
+</body>
+</html>
