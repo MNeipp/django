@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from wall_app.models import Message, Comment
 from .models import User
-from datetime import datetime
+import datetime
 import bcrypt
 
 
@@ -11,12 +11,12 @@ def index(request):
     return render(request,"home.html")
 
 def success(request):
-    today=datetime.now()
+    today=datetime.datetime.today()
     context = {
         "user": User.objects.get(id=request.session["user_id"]),
         "messages": Message.objects.all(),
         "comments": Comment.objects.all(),
-        "time_limit": datetime(today.year, today.month, today.day, today.hour, today.minute-15, today.second)
+        "time_limit": today - datetime.timedelta(minutes=15)
     }
     return render(request,"wall.html", context)
 
