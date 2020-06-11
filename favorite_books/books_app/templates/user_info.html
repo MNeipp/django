@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.0/sketchy/bootstrap.min.css" rel="stylesheet" integrity="sha384-NkI/Nlr1DZ5rUXWWdnuZb97FQRgCCcwC66DC+HUCY0oVx6BgBHUfPcwL1vwp93JZ" crossorigin="anonymous">
+    <title>{{logged_user.first_name}}'s Info</title>
+</head>
+<body>
+    <div class="container">
+        <div class="container mb-3">
+            <div class="bg-primary navbar-dark rounded mt-3">
+                <div class="navbar-brand d-flex justify-content-between pt-4 px-4">
+                    <h2>Welcome, {{logged_user.first_name}}</h2>
+                    <a href="{% url 'logout'%}" class="text-white">Log out</a>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <h2>Your favorite books:</h2>
+            <ul>
+            {% for favorites in logged_user.liked_books.all %}
+                <li>
+                    {{favorites.title}}
+                </li>
+            {% endfor %}
+            </ul>
+
+        </div>
+    
+</body>
+</html>
