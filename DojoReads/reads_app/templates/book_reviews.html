@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.0/superhero/bootstrap.min.css" rel="stylesheet" integrity="sha384-rvwYMW9Z/bbxZfgxHQEKx6D91KwffWAG+XnsoYNCGWi/qL1P9dIVYm1HBiHFqQEt" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/0eb52090db.js" crossorigin="anonymous"></script>
     <title>{{current_book.title}}</title>
 </head>
 <body>
@@ -21,7 +22,7 @@
             <div class="col-6">
                 <h5>Reviews</h5>
                 <hr class="border">
-                {% for review in current_book.has_reviews.all reversed%}
+                {% for review in current_book.has_reviews.all reversed %}
                 <p>Rating = {{review.rating}}</p>
                 <p><a href="/users/{{review.user.id}}">{{review.user.alias}}</a> says: <i>"{{review.content}}"</i></p>
                 <p>{{review.created_at}}</p>
