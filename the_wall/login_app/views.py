@@ -1,17 +1,24 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from wall_app.models import Message, Comment
 from .models import User
+from datetime import datetime
 import bcrypt
+
 
 # Create your views here.
 def index(request):
     return render(request,"home.html")
 
 def success(request):
+    today=datetime.now()
     context = {
-        "name": request.session['name']
+        "user": User.objects.get(id=request.session["user_id"]),
+        "messages": Message.objects.all(),
+        "comments": Comment.objects.all(),
+        "time_limit": datetime(today.year, today.month, today.day, today.hour, today.minute-15, today.second)
     }
-    return render(request,"success.html", context)
+    return render(request,"wall.html", context)
 
 def process(request):
     errors = User.objects.basic_validator(request.POST)
@@ -26,18 +33,17 @@ def process(request):
         DOB = request.POST['DOB']
         password = request.POST['password']
         pswd_hash = bcrypt.hashpw(password.encode(), bcrypt.gensalt()).decode()
-        request.session['name'] = first_name
-        User.objects.create(first_name = first_name, last_name = last_name, email = email, DOB=DOB ,password = pswd_hash)
-    return redirect("/success/")
+        user = User.objects.create(first_name = first_name, last_name = last_name, email = email, DOB=DOB ,password = pswd_hash)
+        request.session['user_id'] = user.id
+    return redirect("/wall/")
 
 def login(request):
     user = User.objects.filter(email__iexact=request.POST['email'])
     if user:
         logged_user = user[0]
         if bcrypt.checkpw(request.POST['password'].encode(), logged_user.password.encode()):
-            print(logged_user.first_name)
-            request.session['name'] = logged_user.first_name
-            return redirect("/success")
+            request.session['user_id'] = logged_user.id
+            return redirect("/wall/")
         else:
             messages.error(request,"Incorrect e-mail or password")
             return redirect('/')
