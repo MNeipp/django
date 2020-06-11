@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.0/superhero/bootstrap.min.css" rel="stylesheet" integrity="sha384-rvwYMW9Z/bbxZfgxHQEKx6D91KwffWAG+XnsoYNCGWi/qL1P9dIVYm1HBiHFqQEt" crossorigin="anonymous">
+    <title>Login/Registration</title>
+</head>
+
+<body>
+    <div>
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li class="text-danger">{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
+        <div class="container d-flex flex-column flex-lg-row flex-md-row">
+        <div class="col-6 text-center mt-4">
+            <h1>Registration</h1>
+            <form action="{%url 'process' %}" class="col-12 mt-4" method="POST">
+                {% csrf_token %}
+                <div class="form-group row">
+                    <label for="name" class="col-sm-3 col-form-label">Name</label>
+                    <input type="text" class="form-control col-9" name="name" id="name">
+                </div>
+                <div class="form-group row">
+                    <label for="alias" class="col-sm-3 col-form-label">Alias</label>
+                    <input type="text" class="form-control col-9" name="alias" id="alias">
+                </div>
+                <div class="form-group row">
+                    <label for="email" class="col-sm-3 col-form-label">Email</label>
+                    <input type="email" class="form-control col-9" name="email" id="email">
+                </div>
+                <div class="form-group row">
+                    <label for="password" class="col-sm-3 col-form-label">Password</label>
+                    <input type="password" class="form-control col-9" name="password" id="password">
+                    <small id="passwordHelp" class="form-text text-muted">Password must be at least 8 characters</small>
+                </div>
+                <div class="form-group row">
+                    <label for="confirm_password" class="col-sm-3 col-form-label">Confirm PW</label>
+                    <input type="password" class="form-control col-9" name="confirm_password" id="confirm_password">
+                </div>
+                <input type="submit" value="Register" class="btn btn-info">
+            </form>
+        </div>
+        <div class="col-6 text-center mt-4">
+            <h1>Login</h1>
+            <form action="{%url 'login' %}" class="col-12 mt-4" method="POST">
+                {% csrf_token %}
+                <div class="form-group row">
+                    <label for="email" class="col-sm-3 col-form-label">Email</label>
+                    <input type="email" class="form-control col-9" name="email" id="email">
+                </div>
+                <div class="form-group row">
+                    <label for="password" class="col-sm-3 col-form-label">Password</label>
+                    <input type="password" class="form-control col-9" name="password" id="password">
+                </div>
+                <input type="submit" value="Login" class="btn btn-info justify-self-right">
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

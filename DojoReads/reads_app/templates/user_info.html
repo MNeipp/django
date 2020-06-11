@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.0/superhero/bootstrap.min.css" rel="stylesheet" integrity="sha384-rvwYMW9Z/bbxZfgxHQEKx6D91KwffWAG+XnsoYNCGWi/qL1P9dIVYm1HBiHFqQEt" crossorigin="anonymous">
+    <title>{{user.alias}}'s Info</title>
+</head>
+<body>
+    <div class="container">
+        <div class="row my-3">
+            <div class="col d-flex justify-content-end align-items-baseline">
+                <a href="{% url 'dashboard' %}">Home</a>
+                <a href="{%url 'add_book' %}" class="mx-5"><u>Add book and review</u></a>
+                <a href="{% url 'logout' %}" class="btn btn-primary mx-5" >Logout</a>
+            </div>
+        </div>
+        <hr class="border">
+        <div class="row">
+            <div class="col-8">
+                <h3>Alias: {{user.alias}}</h3>
+                <h5>Name: {{user.name}}</h4>
+                <h6>Email: {{user.email}}</h4>
+                <h6>Total Reviews: {{total_reviews}}</h4>
+                <hr class="border">
+                <h6>Posted reviews on the following books:</h6>
+                <ul>
+                    {% for review in user.has_reviewed.all %}
+                    <li><a href="/books/{{review.book.id}}">{{review.book.title}}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    
+</body>
+</html>

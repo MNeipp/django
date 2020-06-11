@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.0/superhero/bootstrap.min.css" rel="stylesheet" integrity="sha384-rvwYMW9Z/bbxZfgxHQEKx6D91KwffWAG+XnsoYNCGWi/qL1P9dIVYm1HBiHFqQEt" crossorigin="anonymous">
+    <title>{{current_book.title}}</title>
+</head>
+<body>
+    <div class="container">
+        <div class="row my-3">
+            <div class="col d-flex justify-content-end align-items-baseline">
+                <a href="{% url 'dashboard' %}">Home</a>
+                <a href="{% url 'logout' %}" class="btn btn-primary mx-5" >Logout</a>
+            </div>
+        </div>
+        <hr class="border">
+        <h3><i>{{current_book.title}}</i></h3>
+        <h5><small>Author: {{current_book.author.name}}</small></h5>
+        <div class="row">
+            <div class="col-6">
+                <h5>Reviews</h5>
+                <hr class="border">
+                {% for review in current_book.has_reviews.all reversed%}
+                <p>Rating = {{review.rating}}</p>
+                <p><a href="/users/{{review.user.id}}">{{review.user.alias}}</a> says: <i>"{{review.content}}"</i></p>
+                <p>{{review.created_at}}</p>
+                {% if logged_user.id == review.user.id %}
+                <a href="/books/{{current_book.id}}/{{review.id}}/delete_review/" class="text-danger">Delete Review</a>
+                {% endif %}
+                <hr class="border">
+                {% endfor %}
+            </div>
+            <div class="col-5">
+                {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                <li class="text-danger">{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+                <h5>Submit new review</h5>
+                <form action="{{current_book.id}}/add_review/" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group row col-12">
+                        <label for="content" class="col-form-label col-3">Review</label>
+                        <textarea class="form-control col-9" name="content" id="content" rows="10" style="resize: none;" id="content"></textarea>
+                    </div>
+                    <div class="form-group row col-12">
+                        <label for="rating" class="col-form-label col-3">Rating</label>
+                        <input class="form-control col-4" type="number" name="rating" id="rating" min="1" max="5" placeholder="1-5">
+                        <div class="input-group-append">
+                            <span class="input-group-text">stars</span>
+                          </div>
+                    </div>
+                    <div class="row col-12 d-flex justify-content-center">
+                        <button type="submit" class="btn btn-primary">Add Book and Review</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
