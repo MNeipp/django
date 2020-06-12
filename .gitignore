@@ -3,3 +3,5 @@ school/main/db.sqlite3
 semi-restful_tv_shows/main/db.sqlite3
 
 DojoReads/pip
+DojoReads/db.sqlite3
+the_wall/db.sqlite3

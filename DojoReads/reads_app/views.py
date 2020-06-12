@@ -1,26 +1,33 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from login_app.models import User
-from django.contrib.auth.decorators import login_required
 from . models import Book, Review, Author
 
 # Create your views here.
 
 
 def dashboard(request):
-    context={
-        "logged_user": User.objects.get(id=request.session["user_id"]),
-        "latest_reviews":Review.objects.all().order_by('-id')[:3],
-        "books": Book.objects.all(),
-    }
-    return render (request, "dashboard.html", context)
+    if 'user_id' not in request.session:
+        return redirect ('/')
+    
+    else:
+        context={
+            "logged_user": User.objects.get(id=request.session["user_id"]),
+            "latest_reviews":Review.objects.all().order_by('-id')[:3],
+            "books": Book.objects.all(),
+        }
+        return render (request, "dashboard.html", context)
 
-@login_required(login_url='/')
+
 def add_book(request):
-    context={
-        "authors": Author.objects.all(),
-    }
-    return render(request, "add_book.html", context)
+    if 'user_id' not in request.session:
+        return redirect ('/')
+    
+    else:
+        context={
+            "authors": Author.objects.all(),
+        }
+        return render(request, "add_book.html", context)
 
 def add_book_process(request):
     logged_user = User.objects.get(id=request.session["user_id"])
@@ -44,13 +51,17 @@ def add_book_process(request):
 
     return redirect (f"/books/{new_book.id}")
 
-@login_required(login_url='/')
+
 def book_reviews(request, book_id):
-    context={
-        "current_book":Book.objects.get(id = book_id),
-        "logged_user":User.objects.get(id=request.session['user_id'])
-    }
-    return render(request, "book_reviews.html", context)
+    if 'user_id' not in request.session:
+        return redirect ('/')
+    
+    else:
+        context={
+            "current_book":Book.objects.get(id = book_id),
+            "logged_user":User.objects.get(id=request.session['user_id'])
+        }
+        return render(request, "book_reviews.html", context)
 
 def add_review(request, book_id):
     logged_user = User.objects.get(id = request.session["user_id"])
@@ -65,15 +76,19 @@ def add_review(request, book_id):
     
     return redirect(f"/books/{book_id}")
 
-@login_required(login_url='/')
+
 def user_info(request, user_id):
-    user = User.objects.get(id=user_id)
-    total = len(user.has_reviewed.all())
-    context={
-        "user": user,
-        "total_reviews":total
-    }
-    return render(request, "user_info.html", context)
+    if 'user_id' not in request.session:
+        return redirect ('/')
+    
+    else:
+        user = User.objects.get(id=user_id)
+        total = len(user.has_reviewed.all())
+        context={
+            "user": user,
+            "total_reviews":total
+        }
+        return render(request, "user_info.html", context)
 
 def delete_review(request, review_id, current_book_id):
     Review.objects.get(id=review_id).delete()
