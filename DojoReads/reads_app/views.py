@@ -1,9 +1,11 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from login_app.models import User
+from django.contrib.auth.decorators import login_required
 from . models import Book, Review, Author
 
 # Create your views here.
+
 
 def dashboard(request):
     context={
@@ -13,6 +15,7 @@ def dashboard(request):
     }
     return render (request, "dashboard.html", context)
 
+@login_required(login_url='/')
 def add_book(request):
     context={
         "authors": Author.objects.all(),
@@ -41,6 +44,7 @@ def add_book_process(request):
 
     return redirect (f"/books/{new_book.id}")
 
+@login_required(login_url='/')
 def book_reviews(request, book_id):
     context={
         "current_book":Book.objects.get(id = book_id),
@@ -61,6 +65,7 @@ def add_review(request, book_id):
     
     return redirect(f"/books/{book_id}")
 
+@login_required(login_url='/')
 def user_info(request, user_id):
     user = User.objects.get(id=user_id)
     total = len(user.has_reviewed.all())
