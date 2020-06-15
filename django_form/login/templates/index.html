@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.0/cosmo/bootstrap.min.css" rel="stylesheet" integrity="sha384-9/chHLTCcBULgxOFoUyZXSgEF0uFXs+NrQqzcy/DXqcR+Sk8C1l4EgmUXAEzTb92" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <div class="container d-flex flex-column flex-lg-row flex-md-row">
+            <div class="col-6 mt-4">
+                <h2 class="ml-3">Registration</h2>
+                {% load crispy_forms_tags %}
+                <form action="{% url 'registration' %}" class="col-12 mt-4 text-left" method="POST">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-6">
+                            {{ reg_form.first_name|as_crispy_field}}
+                        </div>
+                        <div class="col-6">
+                            {{ reg_form.last_name|as_crispy_field }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            {{ reg_form.email|as_crispy_field }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            {{ reg_form.password|as_crispy_field }}
+                        </div>
+                        <div class="col-6">
+                            {{reg_form.confirm_password|as_crispy_field}}
+                        </div>
+                    </div>
+                    <input type="submit" value="Register" class="btn btn-info btn-lg">
+                </form>
+            </div>
+            <div class="col-6 text-left mt-4 ml-5">
+                <h2 class="ml-3">Login</h2>
+                <form action="{% url 'registration' %}" class="col-12 mt-4 text-left" method="POST">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-8">
+                            {{login_form.email|as_crispy_field}}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-8">
+                            {{login_form.password|as_crispy_field}}
+                        </div>
+                    </div>
+                    <input type="submit" value="Login" class="btn btn-info justify-self-right">
+                </form>
+            </div>
+    </div>
+    
+</body>
+</html>
