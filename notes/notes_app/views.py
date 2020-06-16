@@ -6,7 +6,11 @@ from .models import Note
 def index(request):
     if request.method == 'POST':
         Note.objects.create(title = request.POST['title'],content=request.POST['content'])
-        return redirect(reverse("dashboard"))
+        
+        context={
+            "notes":Note.objects.all()
+        }
+        return render (request, "notes_index.html", context)
     else:
         context={
             "notes":Note.objects.all()

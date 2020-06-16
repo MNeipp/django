@@ -6,14 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.0/journal/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-vjBZc/DqIqR687k5rf6bUQ6IVSOxQUi9TcwtvULstA7+YGi//g3oT2qkh8W1Drx9" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
     <title>Notes</title>
 </head>
 
 <body>
     <div class="container mt-3">
         <h1>My Notes</h1>
-
-        <div class="container row mt-4">
+        <div id="board" class="container row mt-4">
             <div class="d-flex flex-wrap col-12">
                 {% for note in notes %}
                 <div class="card bg-primary text-white col-3 p-0 mx-1 my-3">
@@ -25,9 +26,9 @@
                     </div>
                 </div>
                 {% endfor %}
-
             </div>
         </div>
+
         <div class="container my-5">
             <h3>New Note</h3>
             <form action="{% url 'dashboard' %}" method="POST">
@@ -45,5 +46,19 @@
         </div>
     </div>
 </body>
+<script>
+    $('form').submit(function(e){
+      e.preventDefault();
+      console.log("Form submitted but no HTTP request sent to server!");
+      $.ajax({
+        url: "{% url 'dashboard' %}",
+        method: "post",
+        data: $(this).serialize(),
+        success: function(serverResponse){
+            $("#board").html(serverResponse)
+        }
+      })
+    });
+  </script>
 
 </html>
