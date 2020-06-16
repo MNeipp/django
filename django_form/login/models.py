@@ -15,9 +15,17 @@ def password_validator(password):
         'Password must be at least 8 characters'
     )
 
+def emailValidator(email):
+    if User.objects.filter(email__iexact=email).exists():
+        raise ValidationError(
+        'That email is already registered'
+    )
+
 
 class User(models.Model):
     first_name = models.CharField(max_length=255, validators=[name_validator])
     last_name = models.CharField(max_length=255, validators=[name_validator])
-    email = models.EmailField(max_length = 255)
+    email = models.EmailField(max_length = 255, validators=[emailValidator])
     password = models.CharField(max_length=255, validators = [password_validator])
+    created_at = models.DateTimeField(auto_now_add=True)
+    updatede_at = models.DateTimeField(auto_now=True)

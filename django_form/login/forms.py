@@ -1,11 +1,11 @@
 from django import forms
 from django.core.exceptions import ValidationError
 from .models import *
+import bcrypt
 
 
 
 class RegistrationForm(forms.ModelForm):
-    password = forms.CharField(max_length=255, widget=forms.PasswordInput)
     confirm_password = forms.CharField(max_length=255, widget=forms.PasswordInput)
     class Meta:
         model = User
@@ -23,6 +23,7 @@ class RegistrationForm(forms.ModelForm):
                 "Passwords don't match"
             )
         return cleaned_data
+
 
 class LoginForm(forms.Form):
     email = forms.EmailField()
