@@ -10,6 +10,20 @@
 </head>
 
 <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary justify-content-">
+        <a class="navbar-brand">Test App</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01"
+          aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarColor01">
+          <div class="navbar-nav mr-auto">
+            <a class="nav-link nav-item" href="C:\Users\Reamu\desktop\dojo-projects\python-stack\django\user_dashboard\dashboard_app\templates\home.html">Home <span class="sr-only">(current)</span></a>
+          </div>
+              <a class="nav-link navbar-text text-light" href="C:\Users\Reamu\desktop\dojo-projects\python-stack\django\user_dashboard\login_app\templates\login.html">Sign in</a>
+        </div>
+      </nav>
+      <br>
     <div>
         {% if messages %}
         <ul class="messages">
@@ -34,7 +48,9 @@
                         <input type="password" class="form-control col-9" name="password" id="password">
                     </div>
                 </form>
-                <input type="submit" value="Login" class="col-9 col-md-3 btn btn-info">
+                <!-- <input type="submit" value="Login" class="col-9 col-md-3 btn btn-info"> -->
+                <a href="C:\Users\Reamu\desktop\dojo-projects\python-stack\django\user_dashboard\dashboard_app\templates\dashboard.html" class="col-9 col-md-3 btn btn-info text-white">Login</a>
+
                 <br>
                 <br>
                 <a href="C:\Users\Reamu\desktop\dojo-projects\python-stack\django\user_dashboard\login_app\templates\register.html"><u>Don't have an account? Register!</u></a>
@@ -42,4 +58,13 @@
         </div>
     </div>
 </body>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+</script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+</script>
 </html>
