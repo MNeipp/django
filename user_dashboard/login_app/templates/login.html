@@ -41,16 +41,17 @@
                     {% csrf_token %}
                     <div class="form-group">
                         <label for="email" class="col-form-label">Email:</label>
-                        <input type="email" class="form-control col-9" name="email" id="email">
+                        <input type="email" class="form-control col-sm-9" name="email" id="email">
                     </div>
                     <div class="form-group">
                         <label for="password" class="col-form-label">Password:</label>
-                        <input type="password" class="form-control col-9" name="password" id="password">
+                        <input type="password" class="form-control col-sm-9" name="password" id="password">
                     </div>
                 </form>
                 <!-- <input type="submit" value="Login" class="col-9 col-md-3 btn btn-info"> -->
-                <a href="C:\Users\Reamu\desktop\dojo-projects\python-stack\django\user_dashboard\dashboard_app\templates\dashboard.html" class="col-9 col-md-3 btn btn-info text-white">Login</a>
-
+                <div class="row col-sm-12 col-md-9 p-0 ml-0">
+                    <a href="C:\Users\Reamu\desktop\dojo-projects\python-stack\django\user_dashboard\dashboard_app\templates\dashboard.html" class="col-sm-12 col-md-3 btn btn-primary text-white ml-auto">Login</a>
+                </div> 
                 <br>
                 <br>
                 <a href="C:\Users\Reamu\desktop\dojo-projects\python-stack\django\user_dashboard\login_app\templates\register.html"><u>Don't have an account? Register!</u></a>

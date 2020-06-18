@@ -18,7 +18,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarColor01">
           <div class="navbar-nav mr-auto">
-            <a class="nav-link nav-item" href="C:\Users\Reamu\desktop\dojo-projects\python-stack\django\user_dashboard\dashboard_app\templates\home.html">Home <span class="sr-only">(current)</span></a>
+            <a class="nav-link nav-item" href="C:\Users\Reamu\desktop\dojo-projects\python-stack\django\user_dashboard\dashboard_app\templates\dashboard.html">Home <span class="sr-only">(current)</span></a>
           </div>
           <a class="nav-link navbar-text nav-item text-light" href="C:\Users\Reamu\desktop\dojo-projects\python-stack\django\user_dashboard\login_app\templates\login.html">Sign in</a>
         </div>
@@ -41,30 +41,32 @@
                     {% csrf_token %}
                     <div class="form-group">
                         <label for="email" class="col-form-label">Email:</label>
-                        <input type="email" class="form-control col-9" name="email" id="email">
+                        <input type="email" class="form-control col-sm-9" name="email" id="email">
                     </div>
                     <div class="form-group">
                         <label for="first_name" class="col-form-label">First Name:</label>
-                        <input type="text" class="form-control col-9" name="first_name" id="last_name">
+                        <input type="text" class="form-control col-sm-9" name="first_name" id="last_name">
                     </div>
                     <div class="form-group">
                         <label for="last_name" class="col-form-label">Last Name:</label>
-                        <input type="text" class="form-control col-9" name="last_name" id="last_name">
+                        <input type="text" class="form-control col-sm-9" name="last_name" id="last_name">
                     </div>
                     <div class="form-group">
                         <label for="password" class="col-form-label">Password:</label>
-                        <input type="password" class="form-control col-9" name="password" id="password">
+                        <input type="password" class="form-control col-sm-9" name="password" id="password">
                     </div>
                     <div class="form-group">
                         <label for="confirm_password" class="col-form-label">Confirm Password:</label>
-                        <input type="password" class="form-control col-9" name="confirm_password" id="confirm_password">
+                        <input type="password" class="form-control col-sm-9" name="confirm_password" id="confirm_password">
                     </div>
                 </form>
                 <!-- <input type="submit" value="Register" class="col-9 col-md-3 btn btn-info"> -->
-                <a href="C:\Users\Reamu\desktop\dojo-projects\python-stack\django\user_dashboard\dashboard_app\templates\dashboard.html" class="col-9 col-md-3 btn btn-info text-white">Register</a>
+                <div class="row col-sm-12 col-md-9 p-0 ml-0">
+                    <a href="C:\Users\Reamu\desktop\dojo-projects\python-stack\django\user_dashboard\dashboard_app\templates\dashboard.html" class="col-sm-12 col-md-3 btn btn-primary text-white ml-auto">Register</a>
+                </div>               
+                 <br>
                 <br>
-                <br>
-                <a href="C:\Users\Reamu\desktop\dojo-projects\python-stack\django\user_dashboard\login_app\templates\login.html""><u>Already have an account? Login!</u></a>
+                <a href="C:\Users\Reamu\desktop\dojo-projects\python-stack\django\user_dashboard\login_app\templates\login.html"><u>Already have an account? Login!</u></a>
             </div>
 
         </div>

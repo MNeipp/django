@@ -18,8 +18,8 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarColor01">
           <div class="navbar-nav mr-auto">
-            <a class="nav-link nav-item active" href="C:\Users\Reamu\desktop\dojo-projects\python-stack\django\user_dashboard\dashboard_app\templates\home.html">Dashboard <span class="sr-only">(current)</span></a>
-            <a class="nav-link nav-item" href="C:\Users\Reamu\desktop\dojo-projects\python-stack\django\user_dashboard\dashboard_app\templates\home.html">Profile</a>
+            <a class="nav-link nav-item active" href="C:\Users\Reamu\desktop\dojo-projects\python-stack\django\user_dashboard\dashboard_app\templates\dashboard.html">Dashboard <span class="sr-only">(current)</span></a>
+            <a class="nav-link nav-item" href="C:\Users\Reamu\desktop\dojo-projects\python-stack\django\user_dashboard\dashboard_app\templates\profile.html">Profile</a>
           </div>
           <a class="nav-link text-light" href="file:///C:/Users/Reamu/desktop/dojo-projects/python-stack/django/user_dashboard/dashboard_app/templates/home.html">Log Off</a>
         </div>
@@ -37,7 +37,7 @@
     <div class="container">
         <div class="row d-flex">
             <h2 class="mb-4 ml-3">Add a new user</h2>
-            <a href="C:\Users\Reamu\desktop\dojo-projects\python-stack\django\user_dashboard\dashboard_app\templates\dashboard.html" class="btn btn-primary ml-auto mr-3"  style="height:40px">Return to Dashboard</a>
+            <a href="C:\Users\Reamu\desktop\dojo-projects\python-stack\django\user_dashboard\dashboard_app\templates\dashboard.html" class="btn btn-primary ml-auto mr-3 d-none d-md-block"  style="height:40px">Return to Dashboard</a>
           </div>
         <div class="row">
             <div class="col-sm-12 col-md-6 mb-4 ml-5">
@@ -45,27 +45,28 @@
                     {% csrf_token %}
                     <div class="form-group">
                         <label for="email" class="col-form-label">Email:</label>
-                        <input type="email" class="form-control col-9" name="email" id="email">
+                        <input type="email" class="form-control col-sm-9" name="email" id="email">
                     </div>
                     <div class="form-group">
                         <label for="first_name" class="col-form-label">First Name:</label>
-                        <input type="text" class="form-control col-9" name="first_name" id="last_name">
+                        <input type="text" class="form-control col-sm-9" name="first_name" id="last_name">
                     </div>
                     <div class="form-group">
                         <label for="last_name" class="col-form-label">Last Name:</label>
-                        <input type="text" class="form-control col-9" name="last_name" id="last_name">
+                        <input type="text" class="form-control col-sm-9" name="last_name" id="last_name">
                     </div>
                     <div class="form-group">
                         <label for="password" class="col-form-label">Password:</label>
-                        <input type="password" class="form-control col-9" name="password" id="password">
+                        <input type="password" class="form-control col-sm-9" name="password" id="password">
                     </div>
                     <div class="form-group">
                         <label for="confirm_password" class="col-form-label">Confirm Password:</label>
-                        <input type="password" class="form-control col-9" name="confirm_password" id="confirm_password">
+                        <input type="password" class="form-control col-sm-9" name="confirm_password" id="confirm_password">
                     </div>
                 </form>
-                <!-- <input type="submit" value="Register" class="col-9 col-md-3 btn btn-info"> -->
-                <a href="C:\Users\Reamu\desktop\dojo-projects\python-stack\django\user_dashboard\dashboard_app\templates\dashboard.html" class="col-9 col-md-3 btn btn-info text-white">Create</a>
+                <div class="row col-sm-12 col-md-9 p-0 ml-0">
+                    <a href="C:\Users\Reamu\desktop\dojo-projects\python-stack\django\user_dashboard\dashboard_app\templates\dashboard.html" class="col-sm-12 col-md-3 btn btn-primary text-white ml-auto">Create</a>
+                </div>
             </div>
 
         </div>
