@@ -37,7 +37,7 @@
         <div class="row">
             <div class="col-sm-12 col-md-6 mb-4 ml-5">
                 <h1 class="">Login</h1>
-                <form action="{%url 'process' %}" class="mt-4" method="POST">
+                <form action="{%url 'process' %}" class="mt-4" method="POST" id="login-form">
                     {% csrf_token %}
                     <div class="form-group">
                         <label for="email" class="col-form-label">Email:</label>
@@ -48,9 +48,8 @@
                         <input type="password" class="form-control col-sm-9" name="password" id="password">
                     </div>
                 </form>
-                <!-- <input type="submit" value="Login" class="col-9 col-md-3 btn btn-info"> -->
                 <div class="row col-sm-12 col-md-9 p-0 ml-0">
-                    <a href="C:\Users\Reamu\desktop\dojo-projects\python-stack\django\user_dashboard\dashboard_app\templates\dashboard.html" class="col-sm-12 col-md-3 btn btn-primary text-white ml-auto">Login</a>
+                    <input type="submit" value="Login" form="login-form" class="col-sm-12 col-md-3 btn btn-primary text-white ml-auto">
                 </div> 
                 <br>
                 <br>
