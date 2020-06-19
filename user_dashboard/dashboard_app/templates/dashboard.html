@@ -17,18 +17,20 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarColor01">
         <div class="navbar-nav mr-auto">
-          <a class="nav-link nav-item active disabled" href="C:\Users\Reamu\desktop\dojo-projects\python-stack\django\user_dashboard\dashboard_app\templates\dashboard.html">Dashboard <span class="sr-only">(current)</span></a>
-          <a class="nav-link nav-item" href="C:\Users\Reamu\desktop\dojo-projects\python-stack\django\user_dashboard\dashboard_app\templates\profile.html">Profile</a>
+          <a class="nav-link nav-item active disabled" href="{% url 'dashboard' %}">Dashboard <span class="sr-only">(current)</span></a>
+          <a class="nav-link nav-item" href="{% url 'profile' %}">Profile</a>
           <a class="nav-link nav-item" href="C:\Users\Reamu\desktop\dojo-projects\python-stack\django\user_dashboard\dashboard_app\templates\message_board.html">Message Board</a>
         </div>
-        <a class="nav-link text-light" href="file:///C:/Users/Reamu/desktop/dojo-projects/python-stack/django/user_dashboard/dashboard_app/templates/home.html">Log Off</a>
+        <a class="nav-link text-light" href="{% url 'logout' %}">Log Out</a>
       </div>
     </nav>
     <br>
     <div class="container">
       <div class="row d-flex">
         <h2 class="mb-4 ml-3">Manage Users</h2>
-        <a href="C:\Users\Reamu\desktop\dojo-projects\python-stack\django\user_dashboard\dashboard_app\templates\add.html" class="btn btn-primary ml-auto mr-3"  style="height:40px">Add User</a>
+        {% if logged_user.user_level == 9 %}
+          <a href="{% url 'add_user' %}" class="btn btn-primary ml-auto mr-3"  style="height:40px">Add User</a>
+        {% endif %}
       </div>
         <table class="table table-responsive-sm table-striped table-bordered">
             <thead>
@@ -38,50 +40,24 @@
                     <th>Email</th>
                     <th>Created At</th>
                     <th>User Level</th>
-                    <th>Actions</th>
+                    {% if logged_user.user_level == 9 %}
+                      <th>Actions</th>
+                    {% endif %}
                 </tr>
             </thead>
             <tbody>
+              {% for user in users %}
                 <tr>
-                    <td>1</td>
-                    <td><a href="C:\Users\Reamu\desktop\dojo-projects\python-stack\django\user_dashboard\dashboard_app\templates\profile.html">John</a></td>
-                    <td>john@email.com</td>
-                    <td>12/12/20</td>
-                    <td>Admin</td>
-                    <td><a href="C:\Users\Reamu\desktop\dojo-projects\python-stack\django\user_dashboard\dashboard_app\templates\profile.html" class="mr-3">Edit</a><a href=""class="border-left pl-3">Remove</a></td>
+                    <td>{{user.id}}</td>
+                    <td><a href="">{{user.first_name}} {{user.last_name}}</a></td>
+                    <td>{{user.email}}</td>
+                    <td>{{user.created_at}}</td>
+                    <td>{{user.get_user_level_display}}</td>
+                    {% if logged_user.user_level == 9 %}
+                      <td><a href="" class="mr-3">Edit</a><a href=""class="border-left pl-3">Remove</a></td>
+                    {% endif %}
                 </tr>
-                <tr>
-                    <td>2</td>
-                    <td><a href="C:\Users\Reamu\desktop\dojo-projects\python-stack\django\user_dashboard\dashboard_app\templates\profile.html">Jacob</a></td>
-                    <td>jacob@email.com</td>
-                    <td>12/12/20</td>
-                    <td>User</td>
-                    <td><a href="C:\Users\Reamu\desktop\dojo-projects\python-stack\django\user_dashboard\dashboard_app\templates\profile.html" class="mr-3">Edit</a><a href=""class="border-left pl-3">Remove</a></td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td><a href="C:\Users\Reamu\desktop\dojo-projects\python-stack\django\user_dashboard\dashboard_app\templates\profile.html">Jeremy</a></td>
-                    <td>jeremy@email.com</td>
-                    <td>12/12/20</td>
-                    <td>User</td>
-                    <td><a href="C:\Users\Reamu\desktop\dojo-projects\python-stack\django\user_dashboard\dashboard_app\templates\profile.html" class="mr-3">Edit</a><a href=""class="border-left pl-3">Remove</a></td>
-                </tr>
-                <tr>
-                    <td>4</td>
-                    <td><a href="C:\Users\Reamu\desktop\dojo-projects\python-stack\django\user_dashboard\dashboard_app\templates\profile.html">Joseph</a></td>
-                    <td>joseph@email.com</td>
-                    <td>12/12/20</td>
-                    <td>Admin</td>
-                    <td><a href="C:\Users\Reamu\desktop\dojo-projects\python-stack\django\user_dashboard\dashboard_app\templates\profile.html" class="mr-3">Edit</a><a href=""class="border-left pl-3">Remove</a></td>
-                </tr>
-                <tr>
-                    <td>5</td>
-                    <td><a href="C:\Users\Reamu\desktop\dojo-projects\python-stack\django\user_dashboard\dashboard_app\templates\profile.html">James</a></td>
-                    <td>james@email.com</td>
-                    <td>12/12/20</td>
-                    <td>User</td>
-                    <td><a href="C:\Users\Reamu\desktop\dojo-projects\python-stack\django\user_dashboard\dashboard_app\templates\profile.html" class="mr-3">Edit</a><a href=""class="border-left pl-3">Remove</a></td>
-                </tr>
+              {% endfor %}
             </tbody>
         </table>
     </div>

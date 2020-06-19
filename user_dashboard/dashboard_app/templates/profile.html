@@ -19,13 +19,13 @@
         <div class="collapse navbar-collapse" id="navbarColor01">
             <div class="navbar-nav mr-auto">
                 <a class="nav-link nav-item"
-                    href="dashboard_app\templates\dashboard.html">Dashboard</a>
-                <a class="nav-link nav-item active disabled" href="dashboard_app\templates\profile.html"><span class="sr-only">(current)</span>Profile</a>
-                    <a class="nav-link nav-item" href="dashboard_app\templates\message_board.html">Message Board</a>
+                    href="{% url 'home' %}">Dashboard</a>
+                <a class="nav-link nav-item active disabled" href="{% url 'profile' %}"><span class="sr-only">(current)</span>Profile</a>
+                    <a class="nav-link nav-item" href="">Message Board</a>
             </div>
             <a class="nav-link text-light"
-                href="dashboard_app\templates\home.html">Log
-                Off</a>
+                href="{% url 'logout' %}">Log
+                Out</a>
         </div>
     </nav>
     <br>
@@ -35,18 +35,34 @@
         <div class="ml-4 row">
             <div class="col-sm-12 col-md-4 mt-4">
                 <h3>Edit Information</h3>
-                <form action="" method="POST" id="profile-form">
+                <form action="{% url 'update_info' %}" method="POST" id="profile-form">
+                    {% csrf_token %}
                     <div class="form-group">
                         <label for="email" class="col-form-label">Email:</label>
-                        <input type="email" class="form-control" name="email" id="email">
+                        <input type="email" class="form-control" name="email" id="email" value="{{logged_user.email}}">
+                    {% for message in messages %}
+                        {% if "email" in message.extra_tags %}
+                            <p class="text-danger"><small>{{message}}</small></p>
+                        {% endif %}
+                    {% endfor %}
                     </div>
                     <div class="form-group">
                         <label for="first_name" class="col-form-label">First Name:</label>
-                        <input class="form-control" type="text" name="first_name" id="first_name">
+                        <input class="form-control" type="text" name="first_name" id="first_name" value="{{logged_user.first_name}}">
+                    {% for message in messages %}
+                        {% if "first_name" in message.extra_tags %}
+                            <p class="text-danger"><small>{{message}}</small></p>
+                        {% endif %}
+                    {% endfor %}
                     </div>
                     <div class="form-group">
                         <label for="last_name" class="col-form-label">Last Name:</label>
-                        <input class="form-control" type="text" name="last_name" id="last_name">
+                        <input class="form-control" type="text" name="last_name" id="last_name" value="{{logged_user.last_name}}">
+                    {% for message in messages %}
+                        {% if "last_name" in message.extra_tags %}
+                            <p class="text-danger"><small>{{message}}</small></p>
+                        {% endif %}
+                    {% endfor %}
                     </div>
                 </form>
                 <div class="row col-sm-12 p-0 ml-0">
@@ -57,14 +73,25 @@
             <div class="col-md-2 d.sm-none"></div>
             <div class=" col-sm-12 col-md-4 mt-4">
                 <h3>Change Password</h3>
-                <form action="" method="post" id="password-form">
+                <form action="{% url 'update_password' %}" method="post" id="password-form">
+                    {% csrf_token %}
                     <div class="form-group">
                         <label for="password" class="col-form-label">New Password:</label>
                         <input type="password" name="password" id="password" class="form-control">
+                    {% for message in messages %}
+                        {% if "password" in message.extra_tags %}
+                            <p class="text-danger"><small>{{message}}</small></p>
+                        {% endif %}
+                    {% endfor %}
                     </div>
                     <div class="form-group">
                         <label for="confirm_password" class="col-form-label">Confirm Password:</label>
                         <input type="password" name="confirm_password" id="confirm_password" class="form-control">
+                    {% for message in messages %}
+                        {% if "confirm" in message.extra_tags %}
+                            <p class="text-danger"><small>{{message}}</small></p>
+                        {% endif %}
+                    {% endfor %}
                     </div>
                 </form>
                 <div class="row col-sm-12 p-0 ml-0">
@@ -76,11 +103,12 @@
 
         <div class="row ml-4 my-3">
             <div class="col-sm-12">
-                <form action="" id="description-form" method="POST">
+                <form action="{% url 'update_description' %}" id="description-form" method="POST">
+                    {% csrf_token %}
                     <div class="form-group">
                         <label for="description" class="col-form-label">Edit Description:</label>
                         <textarea name="description" id="description" class="form-control" rows="4"
-                            style="resize:none"></textarea>
+                            style="resize:none">{{logged_user.description}}</textarea>
                     </div>
                 </form>
                 <div class="row col-sm-12 p-0 ml-0">

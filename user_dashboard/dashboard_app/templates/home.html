@@ -18,9 +18,9 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarColor01">
         <div class="navbar-nav mr-auto">
-          <a class="nav-link nav-item active" href="C:\Users\Reamu\desktop\dojo-projects\python-stack\django\user_dashboard\dashboard_app\templates\home.html">Home <span class="sr-only">(current)</span></a>
+          <a class="nav-link nav-item active disabled" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
         </div>
-        <a class="nav-link navbar-text text-light" href="C:\Users\Reamu\desktop\dojo-projects\python-stack\django\user_dashboard\login_app\templates\login.html">Sign in</a>
+        <a class="nav-link navbar-text text-light" href="{% url 'signin' %}">Sign in</a>
       </div>
     </nav>
     <br>
@@ -31,7 +31,7 @@
           <h1 class="display-3">Dojo-U</h1>
           <p class="lead">Welcome to the messaging system for students enrolled in Dojo University!</p>
           <hr>
-          <a href="C:\Users\Reamu\desktop\dojo-projects\python-stack\django\user_dashboard\login_app\templates\register.html" class="btn btn-primary btn-lg text-white">Get Started!</a>
+          <a href="{% url 'register' %}" class="btn btn-primary btn-lg text-white">Get Started!</a>
         </div>
       </div>
       <div class="row">
@@ -41,7 +41,7 @@
         </div>
         <div class="col-md-4">
           <p><strong>Communicate</strong></p>
-          <p>Leave your classmates messages about upcoming assignments, study groups, or parties. Or just to say "hi!"</p>
+          <p>Leave your classmates messages about upcoming assignments, study groups, or parties. Or just say "hi!"</p>
         </div>
         <div class="col-md-4">
           <p><strong>Edit Contact Information</strong></p>

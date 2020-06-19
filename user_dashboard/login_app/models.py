@@ -13,7 +13,7 @@ class userManager(models.Manager):
         if len(postData['last_name']) < 2:
             errors['last_name'] = "Last name needs to be at least 2 characters long"
         if not EMAIL_REGEX.match(postData['email']):
-            errors['email'] = "Invalid email address!"
+            errors['email'] = "Invalid email address"
         result_email = User.objects.filter(email__iexact=(postData['email']))
         if len(result_email) > 0:
             errors['email'] = "That e-mail address is already registered"
@@ -29,9 +29,10 @@ class User(models.Model):
     email = models.CharField(max_length=255)
     password = models.CharField(max_length=255)
     user_level_choices =[
-        (0,"normal"),
-        (9,"admin")
+        (0,"Normal"),
+        (9,"Admin")
     ]
+    description = models.TextField(null=True)
     user_level = models.IntegerField(choices=user_level_choices, default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     edited_at = models.DateTimeField(auto_now=True)

@@ -18,34 +18,37 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarColor01">
           <div class="navbar-nav mr-auto">
-            <a class="nav-link nav-item" href="C:\Users\Reamu\desktop\dojo-projects\python-stack\django\user_dashboard\dashboard_app\templates\home.html">Home <span class="sr-only">(current)</span></a>
+            <a class="nav-link nav-item" href="{% url 'home' %}">Home</a>
           </div>
-              <a class="nav-link navbar-text text-light" href="C:\Users\Reamu\desktop\dojo-projects\python-stack\django\user_dashboard\login_app\templates\login.html">Sign in</a>
+              <a class="nav-link navbar-text text-light disabled" href="{% url 'signin' %}"><span class="sr-only">(current)</span>Sign in</a>
         </div>
       </nav>
       <br>
-    <div>
-        {% if messages %}
-        <ul class="messages">
-            {% for message in messages %}
-            <li class="text-danger">{{ message }}</li>
-            {% endfor %}
-        </ul>
-        {% endif %}
-    </div>
     <div class="container">
         <div class="row">
             <div class="col-sm-12 col-md-6 mb-4 ml-5">
                 <h1 class="">Login</h1>
-                <form action="{%url 'process' %}" class="mt-4" method="POST" id="login-form">
+                <form action="{%url 'login' %}" class="mt-4" method="POST" id="login-form">
                     {% csrf_token %}
                     <div class="form-group">
                         <label for="email" class="col-form-label">Email:</label>
-                        <input type="email" class="form-control col-sm-9" name="email" id="email">
+                        <input type="email" class="form-control col-sm-9" name="email" id="email" value="{{email}}">
+                    {% for message in messages %}
+                        {% if "email" in message.extra_tags %}
+                            <p class="text-danger"><small>{{message}}</small></p>
+                        {% endif %}
+                    {% endfor %}
                     </div>
                     <div class="form-group">
                         <label for="password" class="col-form-label">Password:</label>
                         <input type="password" class="form-control col-sm-9" name="password" id="password">
+                {% if messages %}
+                    {% for message in messages %}
+                        {% if "password" in message.extra_tags %}
+                            <p class="text-danger"><small>{{message}}</small></p> 
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
                     </div>
                 </form>
                 <div class="row col-sm-12 col-md-9 p-0 ml-0">
@@ -53,7 +56,7 @@
                 </div> 
                 <br>
                 <br>
-                <a href="C:\Users\Reamu\desktop\dojo-projects\python-stack\django\user_dashboard\login_app\templates\register.html"><u>Don't have an account? Register!</u></a>
+                <a href="{% url 'register' %}"><u>Don't have an account? Register!</u></a>
             </div>
         </div>
     </div>
