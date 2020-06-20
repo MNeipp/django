@@ -58,10 +58,20 @@
                     {{post.content}}
                 </div>
             </div>
-
-            <div class="row mt-4">
+            {% for comment in post.has_comments.all reversed %}
+            <div class="row ml-4 mt-4">
+                <div class="col-sm-12 d-flex justify-content-between ">
+                    <p class="inline-block"><strong>{{comment.creator.first_name}} wrote:</strong></p>
+                    <p class="inline-block"><em>{{comment.created_at}}</em></p>
+                </div>
+                <div class="col-sm-12 ml-4">
+                    {{comment.content}}
+                </div>
+            </div>
+            {% endfor %}
+            <div class="row mt-4 ml-4">
                 <div class="col-sm-12 col-md-12 ml-4">
-                    <form action="{% url 'make_comment' post.id %}" method="POST" id="comment-form">
+                    <form action="{% url 'make_comment' post.id %}" method="POST" id="comment_form_{{post.id}}">
                         {% csrf_token %}
                         <div class="form-group">
                             <textarea class="form-control" name="comment" id="comment" rows="5" style="resize:none;" placeholder="make a comment"></textarea>
@@ -69,7 +79,7 @@
                     </form>
                 </div>
                 <div class="row col-sm-12 ml-4 mt-1 d-flex justify-content-end">
-                    <input form="comment-form" type="submit" class="col-sm-12 col-md-2 btn btn-success text-white ml-auto" value="Comment">
+                    <input form="comment_form_{{post.id}}" type="submit" class="col-sm-12 col-md-2 btn btn-success text-white ml-auto" value="Comment">
                 </div>
             </div>
         </div>
