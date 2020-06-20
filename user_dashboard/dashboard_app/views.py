@@ -31,16 +31,21 @@ def update_info(request):
     if request.method == "GET":
         return redirect(reverse('home'))
     logged_user = User.objects.get(id=request.session['user_id'])
+    count = 0
     if not EMAIL_REGEX.match(request.POST['email']):
         messages.error(request, "Invalid email address.", extra_tags="email")
+        count+=1
     result_email = User.objects.filter(email__iexact=(request.POST['email']))
     if len(result_email) > 0 and request.POST['email'] != logged_user.email:
         messages.error(request, "That email address is already registered.", extra_tags="email")
+        count+=1
     if len(request.POST['first_name']) < 2:
         messages.error(request, "First name needs to be at least 2 characters long", extra_tags="first_name")
+        count+=1
     if len(request.POST['last_name']) < 2:
         messages.error(request, "Last name needs to be at least 2 characters long", extra_tags="last-name")
-    if messages:
+        count+=1
+    if count > 0:
         return redirect(request.META.get('HTTP_REFERER', 'redirect_if_referer_not_found'))
     else:
         logged_user.email = request.POST['email']
@@ -116,24 +121,27 @@ def edit_user_info(request, user_id):
     if request.method == "GET":
         return redirect(reverse('home'))
     edit_user = User.objects.get(id=user_id)
+    count=0
     if not EMAIL_REGEX.match(request.POST['email']):
         messages.error(request, "Invalid email address.", extra_tags="email")
+        count+=1
     result_email = User.objects.filter(email__iexact=(request.POST['email']))
     if len(result_email) > 0 and request.POST['email'] != edit_user.email:
         messages.error(request, "That email address is already registered.", extra_tags="email")
+        count+=1
     if len(request.POST['first_name']) < 2:
         messages.error(request, "First name needs to be at least 2 characters long", extra_tags="first_name")
+        count+=1
     if len(request.POST['last_name']) < 2:
         messages.error(request, "Last name needs to be at least 2 characters long", extra_tags="last-name")
-    if messages:
+        count+=1
+    if count > 0:
         # return redirect(request.META.get('HTTP_REFERER', 'redirect_if_referer_not_found'))
         return HttpResponse("How the hell did you get here?")
     else:
         edit_user.email = request.POST['email']
         edit_user.first_name = request.POST['first_name']
         edit_user.last_name = request.POST['last_name']
-        edit_user.user_level = request.post['user_level']
-        print (request.post['user_level'])
-        print("ABOVE THIS LINE!!!!!")
+        edit_user.user_level = request.POST['user_level']
         edit_user.save()
         return redirect(request.META.get('HTTP_REFERER', 'redirect_if_referer_not_found'))
