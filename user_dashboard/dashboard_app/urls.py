@@ -8,5 +8,10 @@ urlpatterns =[
     path('users/edit/update_info/', db_views.update_info, name="update_info"),
     path('users/edit/update_description/', db_views.update_description, name="update_description"),
     path('users/edit/update_password/', db_views.update_password, name="update_password"),
+    path('users/new/', db_views.new_user, name="new_user"),
+    path('users/edit/<int:user_id>/', db_views.edit_user, name="edit_user"),
+    path('users/edit/<int:user_id>/info/', db_views.edit_user_info, name="edit_user_info"),
+    path('users/edit/<int:user_id>/password/', db_views.edit_user_password, name="edit_user_password"),
+
     
 ]

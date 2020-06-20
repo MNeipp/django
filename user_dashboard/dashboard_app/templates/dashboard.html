@@ -29,7 +29,7 @@
       <div class="row d-flex">
         <h2 class="mb-4 ml-3">Manage Users</h2>
         {% if logged_user.user_level == 9 %}
-          <a href="{% url 'add_user' %}" class="btn btn-primary ml-auto mr-3"  style="height:40px">Add User</a>
+          <a href="{% url 'new_user' %}" class="btn btn-primary ml-auto mr-3"  style="height:40px">Add User</a>
         {% endif %}
       </div>
         <table class="table table-responsive-sm table-striped table-bordered">
@@ -54,9 +54,9 @@
                     <td>{{user.created_at}}</td>
                     <td>{{user.get_user_level_display}}</td>
                     {% if logged_user.user_level == 9 %}
-                      <td><a href="" class="mr-3">Edit</a><a href=""class="border-left pl-3">Remove</a></td>
+                    <td><a href="{% url 'edit_user' user.id %}" class="mr-3">Edit</a><a href=""class="border-left pl-3">Remove</a></td>
                     {% endif %}
-                </tr>
+                  </tr>
               {% endfor %}
             </tbody>
         </table>

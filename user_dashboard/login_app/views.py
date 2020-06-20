@@ -19,11 +19,15 @@ def register(request):
     return render(request, "register.html")
 
 def process(request):
+    logged_user = User.objects.filter(id=request.session['user_id'])
     errors = User.objects.basic_validator(request.POST)
     if len(errors) > 0:
         for key,value in errors.items():
             messages.error(request,value, extra_tags=key)
-        return redirect(reverse('register'))
+        if len(logged_user) > 0:
+            return redirect(reverse("new_user"))
+        else:
+            return redirect(reverse('register'))
     else:
         users = User.objects.all()
         if len(users) < 1:
@@ -36,8 +40,9 @@ def process(request):
         password = request.POST['password']
         pswd_hash = bcrypt.hashpw(password.encode(), bcrypt.gensalt()).decode()
         user = User.objects.create(first_name = first_name, last_name=last_name, email = email, password = pswd_hash, user_level = user_level)
-        request.session['user_id'] = user.id
-    return redirect(reverse('dashboard'))
+        if "user_id" not in request.session:
+            request.session['user_id'] = user.id
+        return redirect(reverse('dashboard'))
 
 def login(request):
     if len(request.POST['email']) < 1:

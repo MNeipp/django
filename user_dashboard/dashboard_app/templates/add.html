@@ -18,55 +18,72 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarColor01">
           <div class="navbar-nav mr-auto">
-            <a class="nav-link nav-item" href="C:\Users\Reamu\desktop\dojo-projects\python-stack\django\user_dashboard\dashboard_app\templates\dashboard.html">Dashboard</a>
-            <a class="nav-link nav-item" href="C:\Users\Reamu\desktop\dojo-projects\python-stack\django\user_dashboard\dashboard_app\templates\profile.html">Profile</a>
-            <a class="nav-link nav-item" href="C:\Users\Reamu\desktop\dojo-projects\python-stack\django\user_dashboard\dashboard_app\templates\message_board.html">Message Board</a>
+            <a class="nav-link nav-item" href="{% url 'dashboard' %}">Dashboard</a>
+            <a class="nav-link nav-item" href="{% url 'profile' %}">Profile</a>
+            <a class="nav-link nav-item" href="">Message Board</a>
           </div>
-          <a class="nav-link text-light" href="file:///C:/Users/Reamu/desktop/dojo-projects/python-stack/django/user_dashboard/dashboard_app/templates/home.html">Log Off</a>
+          <a class="nav-link text-light" href="{% url 'logout' %}">Log Off</a>
         </div>
       </nav>
       <br>
-    <div>
-        {% if messages %}
-        <ul class="messages">
-            {% for message in messages %}
-            <li class="text-danger">{{ message }}</li>
-            {% endfor %}
-        </ul>
-        {% endif %}
-    </div>
+      
     <div class="container">
         <div class="row d-flex">
             <h2 class="mb-4 ml-3">Add a new user</h2>
-            <a href="C:\Users\Reamu\desktop\dojo-projects\python-stack\django\user_dashboard\dashboard_app\templates\dashboard.html" class="btn btn-primary ml-auto mr-3 d-none d-md-block"  style="height:40px">Return to Dashboard</a>
+            <a href="{% url 'dashboard' %}" class="btn btn-primary ml-auto mr-3 d-none d-md-block"  style="height:40px">Return to Dashboard</a>
           </div>
         <div class="row">
             <div class="col-sm-12 col-md-6 mb-4 ml-5">
-                <form action="{%url 'process' %}" class="mt-4" method="POST">
+                <form action="{%url 'process' %}" class="mt-4" method="POST" id="new_form">
                     {% csrf_token %}
                     <div class="form-group">
                         <label for="email" class="col-form-label">Email:</label>
                         <input type="email" class="form-control col-sm-9" name="email" id="email">
+                    {% for message in messages %}
+                        {% if "email" in message.extra_tags %}
+                            <p class="text-danger"><small>{{message}}</small></p>
+                        {% endif %}
+                    {% endfor %}
                     </div>
                     <div class="form-group">
                         <label for="first_name" class="col-form-label">First Name:</label>
-                        <input type="text" class="form-control col-sm-9" name="first_name" id="last_name">
+                        <input type="text" class="form-control col-sm-9" name="first_name" id="first_name">
+                    {% for message in messages %}
+                        {% if "first_name" in message.extra_tags %}
+                            <p class="text-danger"><small>{{message}}</small></p>
+                        {% endif %}
+                    {% endfor %}
                     </div>
                     <div class="form-group">
                         <label for="last_name" class="col-form-label">Last Name:</label>
                         <input type="text" class="form-control col-sm-9" name="last_name" id="last_name">
+                    {% for message in messages %}
+                        {% if "last_name" in message.extra_tags %}
+                            <p class="text-danger"><small>{{message}}</small></p>
+                        {% endif %}
+                    {% endfor %}
                     </div>
                     <div class="form-group">
                         <label for="password" class="col-form-label">Password:</label>
                         <input type="password" class="form-control col-sm-9" name="password" id="password">
+                    {% for message in messages %}
+                        {% if "password" in message.extra_tags %}
+                            <p class="text-danger"><small>{{message}}</small></p>
+                        {% endif %}
+                    {% endfor %}
                     </div>
                     <div class="form-group">
                         <label for="confirm_password" class="col-form-label">Confirm Password:</label>
                         <input type="password" class="form-control col-sm-9" name="confirm_password" id="confirm_password">
+                    {% for message in messages %}
+                        {% if "confirm_password" in message.extra_tags %}
+                            <p class="text-danger"><small>{{message}}</small></p>
+                        {% endif %}
+                    {% endfor %}
                     </div>
                 </form>
                 <div class="row col-sm-12 col-md-9 p-0 ml-0">
-                    <a href="C:\Users\Reamu\desktop\dojo-projects\python-stack\django\user_dashboard\dashboard_app\templates\dashboard.html" class="col-sm-12 col-md-3 btn btn-primary text-white ml-auto">Create</a>
+                    <input type="submit" form = "new_form" class="col-sm-12 col-md-3 btn btn-primary text-white ml-auto" value="Create">
                 </div>
             </div>
 
