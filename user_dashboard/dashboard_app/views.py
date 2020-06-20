@@ -119,3 +119,13 @@ def edit_user_info(request, user_id):
         edit_user.user_level = request.POST['user_level']
         edit_user.save()
         return redirect(request.META.get('HTTP_REFERER', 'redirect_if_referer_not_found'))
+
+def message_board(request, user_id):
+    if "user_id" not in request.session:
+        return redirect(reverse("home"))
+    context={
+        "logged_user":User.objects.get(id=request.session["user_id"]),
+        "all_users":User.objects.all(),
+        "user":User.objects.get(id=user_id),
+    }
+    return render(request, "message_board.html",context)
