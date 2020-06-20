@@ -34,7 +34,8 @@
         </div>
         <div class="row ml-2">
             <div class="col-sm-12">
-                <form action="" method="POST" id="message-form">
+                <form action="{% url 'make_post' user.id %}" method="POST" id="message-form">
+                    {% csrf_token %}
                     <div class="form-group">
                         <label for="message" class="col-form-label"><strong>Leave a message for {{user.first_name}}</strong></label>
                         <textarea class="form-control" name="message" id="message" rows="5" style="resize:none;"></textarea>
@@ -45,6 +46,21 @@
                 <input form="message-form" type="submit" class="col-sm-12 col-md-1 btn btn-primary text-white ml-auto" value="Post"></input>
             </div>
         </div>
+        <hr>
+        {% for post in user.board_posts.all reversed %}
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 d-flex justify-content-between">
+                    <p class="inline-block"><strong>{{post.creator.first_name}} wrote:</strong></p>
+                    <p class="inline-block"><em>{{post.created_at}}</em></p>
+                </div>
+                <div class="col-sm-12">
+                    {{post.content}}
+                </div>
+            </div>
+        </div>
+        <hr>
+        {% endfor %}
 
     </div>
     

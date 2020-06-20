@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, reverse, HttpResponse
 from login_app.models import User
 from django.contrib import messages
+from .models import Post, Comment
 import bcrypt
 
 # Create your views here.
@@ -129,3 +130,12 @@ def message_board(request, user_id):
         "user":User.objects.get(id=user_id),
     }
     return render(request, "message_board.html",context)
+
+def make_post(request, user_id):
+    if request.method == "GET":
+        return redirect(reverse("home"))
+    else:
+        logged_user = User.objects.get(id=request.session["user_id"])
+        user_board = User.objects.get(id=user_id)
+        Post.objects.create(content = request.POST["message"], creator = logged_user, board=user_board)
+        return redirect(request.META.get('HTTP_REFERER', 'redirect_if_referer_not_found'))

@@ -61,17 +61,3 @@ class User(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     edited_at = models.DateTimeField(auto_now=True)
     objects = userManager()
-
-class Post(models.Model):
-    content = models.TextField()
-    user = models.ForeignKey(User, related_name="has_posts", on_delete=models.CASCADE)
-    created_at = models.DateTimeField(auto_now_add=True)
-    edited_at = models.DateTimeField(auto_now=True)
-
-class Comment(models.Model):
-    content = models.TextField()
-    user = models.ForeignKey(User, related_name="has_comments", on_delete=models.CASCADE)
-    post = models.ForeignKey(Post, related_name="has_comments", on_delete=models.CASCADE)
-    created_at = models.DateTimeField(auto_now_add=True)
-    edited_at = models.DateTimeField(auto_now=True)
-

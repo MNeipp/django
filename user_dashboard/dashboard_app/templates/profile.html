@@ -21,11 +21,10 @@
                 <a class="nav-link nav-item"
                     href="{% url 'dashboard' %}">Dashboard</a>
                 <a class="nav-link nav-item active disabled" href="{% url 'profile' %}"><span class="sr-only">(current)</span>Profile</a>
-                    <a class="nav-link nav-item" href="">Message Board</a>
+                    <a class="nav-link nav-item" href="{% url 'message_board' logged_user.id %}">Message Board</a>
             </div>
             <a class="nav-link text-light"
-                href="{% url 'logout' %}">Log
-                Out</a>
+                href="{% url 'logout' %}">Log Out</a>
         </div>
     </nav>
     <br>

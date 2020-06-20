@@ -19,13 +19,16 @@ def register(request):
     return render(request, "register.html")
 
 def process(request):
-    logged_user = User.objects.filter(id=request.session['user_id'])
     errors = User.objects.basic_validator(request.POST)
     if len(errors) > 0:
         for key,value in errors.items():
             messages.error(request,value, extra_tags=key)
-        if len(logged_user) > 0:
-            return redirect(reverse("new_user"))
+        if "user_id" in request.session:
+            logged_user = User.objects.get(id=request.session['user_id'])
+            if logged_user.user_level == 9:
+                return redirect(reverse("new_user"))
+            else:
+                return redirect(reverse('register'))
         else:
             return redirect(reverse('register'))
     else:
