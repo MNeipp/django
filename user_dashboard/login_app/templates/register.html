@@ -72,7 +72,7 @@
                             <label for="confirm_password" class="col-form-label">Confirm Password:</label>
                             <input type="password" class="form-control col-sm-9" name="confirm_password" id="confirm_password">
                             {% for message in messages %}
-                                {% if "passwords" in message.extra_tags %}
+                                {% if "confirm" in message.extra_tags %}
                                     <p class="text-danger"><small>{{message}}</small></p>
                                 {% endif %}
                             {% endfor %}

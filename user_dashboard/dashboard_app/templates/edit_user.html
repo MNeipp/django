@@ -79,6 +79,7 @@
                             value="9">Admin</option>
                         </select>
                     </div>
+                    <input type="hidden" name="user_id" value="{{user.id}}">
                 </form>
                 <div class="row col-sm-12 p-0 ml-0">
                     <input form="profile-form" type="submit" class="col-sm-12 col-md-3 btn btn-primary text-white ml-auto" value="Save"></input>
@@ -108,6 +109,7 @@
                         {% endif %}
                     {% endfor %}
                     </div>
+                    <input type="hidden" name="user_id" value="{{user.id}}">
                 </form>
                 <div class="row col-sm-12 p-0 ml-0">
                     <input form="password-form" type="submit" value="Update Password"
