@@ -54,8 +54,22 @@
                     <p class="inline-block"><strong>{{post.creator.first_name}} wrote:</strong></p>
                     <p class="inline-block"><em>{{post.created_at}}</em></p>
                 </div>
-                <div class="col-sm-12">
+                <div class="col-sm-12 ml-4">
                     {{post.content}}
+                </div>
+            </div>
+
+            <div class="row mt-4">
+                <div class="col-sm-12 col-md-12 ml-4">
+                    <form action="{% url 'make_comment' post.id %}" method="POST" id="comment-form">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <textarea class="form-control" name="comment" id="comment" rows="5" style="resize:none;" placeholder="make a comment"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="row col-sm-12 ml-4 mt-1 d-flex justify-content-end">
+                    <input form="comment-form" type="submit" class="col-sm-12 col-md-2 btn btn-success text-white ml-auto" value="Comment">
                 </div>
             </div>
         </div>

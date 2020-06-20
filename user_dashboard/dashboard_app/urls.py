@@ -13,7 +13,9 @@ urlpatterns =[
     path('users/edit/<int:user_id>/info/', db_views.edit_user_info, name="edit_user_info"),
     path('users/edit/<int:user_id>/password/', db_views.edit_user_password, name="edit_user_password"),
     path('users/show/<int:user_id>/', db_views.message_board, name="message_board"),
-    path('users/show/<int:user_id>/post/', db_views.make_post, name="make_post")
+    path('users/show/<int:user_id>/post/', db_views.make_post, name="make_post"),
+    path('users/show/<int:post_id>/comment/', db_views.make_comment, name="make_comment"),
+    
 
 
 ]

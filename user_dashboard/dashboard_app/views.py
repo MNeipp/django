@@ -139,3 +139,12 @@ def make_post(request, user_id):
         user_board = User.objects.get(id=user_id)
         Post.objects.create(content = request.POST["message"], creator = logged_user, board=user_board)
         return redirect(request.META.get('HTTP_REFERER', 'redirect_if_referer_not_found'))
+
+def make_comment(request, post_id):
+    if request.method == "GET":
+        return redirect(reverse("home"))
+    else:
+        logged_user = User.objects.get(id=request.session["user_id"])
+        current_post = Post.objects.get(id=post_id)
+        Comment.objects.create(content = request.POST["comment"], creator = logged_user, post=current_post)
+        return redirect(request.META.get('HTTP_REFERER', 'redirect_if_referer_not_found'))
