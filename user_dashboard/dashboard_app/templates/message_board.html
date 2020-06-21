@@ -1,29 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.0/yeti/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-chJtTd1EMa6hQI40eyJWF6829eEk4oIe7b3nNtUni7VxA3uHc/uIM/8ppyjrggfV" crossorigin="anonymous">
+        integrity="sha384-chJtTd1EMa6hQI40eyJWF6829eEk4oIe7b3nNtUni7VxA3uHc/uIM/8ppyjrggfV" crossorigin="anonymous">
     <title>{{user.first_name}}'s Message Board</title>
 </head>
+
 <body class="bg-secondary">
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary justify-content-">
         <a class="navbar-brand">Dojo-U</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01"
-          aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
+            aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarColor01">
-          <div class="navbar-nav mr-auto">
-            <a class="nav-link nav-item" href="{% url 'dashboard' %}">Dashboard</a>
-            <a class="nav-link nav-item" href="{% url 'profile' %}">Profile</a>
-            <a class="nav-link nav-item active disabled" href="{% url 'message_board' logged_user.id %}"><span class="sr-only">(current)</span>Message Board</a>
-          </div>
-          <a class="nav-link text-light" href="{% url 'logout' %}">Log Out</a>
+            <div class="navbar-nav mr-auto">
+                <a class="nav-link nav-item" href="{% url 'dashboard' %}">Dashboard</a>
+                <a class="nav-link nav-item" href="{% url 'profile' %}">Profile</a>
+                <a class="nav-link nav-item active disabled" href="{% url 'message_board' logged_user.id %}"><span
+                        class="sr-only">(current)</span>Message Board</a>
+            </div>
+            <a class="nav-link text-light" href="{% url 'logout' %}">Log Out</a>
         </div>
-      </nav>
-      <br>
+    </nav>
+    <br>
     <div class="container">
         <h3 class="mb-4"><strong>{{user.first_name}} {{user.last_name}}</strong></h3>
         <div class="user-info ml-4">
@@ -37,56 +40,68 @@
                 <form action="{% url 'make_post' user.id %}" method="POST" id="message_form">
                     {% csrf_token %}
                     <div class="form-group">
-                        <label for="message" class="col-form-label"><strong>Leave a message for {{user.first_name}}</strong></label>
-                        <textarea class="form-control" name="message" id="message" rows="5" style="resize:none;"></textarea>
+                        <label for="message" class="col-form-label"><strong>Leave a message for
+                                {{user.first_name}}</strong></label>
+                        <textarea class="form-control" name="message" id="message" rows="5"
+                            style="resize:none;"></textarea>
                     </div>
                 </form>
             </div>
             <div class="row col-sm-12 px-3 ml-0 mt-1">
-                <input form="message_form" type="submit" class="col-sm-12 col-md-1 btn btn-primary text-white ml-auto" value="Post"></input>
+                <input form="message_form" type="submit" class="col-sm-12 col-md-1 btn btn-primary text-white ml-auto"
+                    value="Post"></input>
             </div>
         </div>
         <hr>
-        {% for post in user.board_posts.all reversed %}
-        <div class="container" id="posts">
-            <div class="row">
-                <div class="col-sm-12 d-flex justify-content-between">
-                    <p class="inline-block"><strong><a href="{% url 'message_board' post.creator.id %}">{{post.creator.first_name}} {{post.creator.last_name}}</a> wrote:</strong></p>
-                    <p class="inline-block"><em>{{post.whenCreated}}</em></p>
+        <div id="posts">
+            {% for post in user.board_posts.all reversed %}
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12 d-flex justify-content-between">
+                        <p class="inline-block"><strong><a
+                                    href="{% url 'message_board' post.creator.id %}">{{post.creator.first_name}}
+                                    {{post.creator.last_name}}</a> wrote:</strong></p>
+                        <p class="inline-block"><em>{{post.whenCreated}}</em></p>
+                    </div>
+                    <div class="col-sm-12 ml-4">
+                        {{post.content}}
+                    </div>
                 </div>
-                <div class="col-sm-12 ml-4">
-                    {{post.content}}
+                {% for comment in post.has_comments.all %}
+                <div class="row ml-4 mt-4">
+                    <div class="col-sm-12 d-flex justify-content-between ">
+                        <p class="inline-block"><strong><a
+                                    href="{% url 'message_board' comment.creator.id %}">{{comment.creator.first_name}}</a>
+                                wrote:</strong></p>
+                        <p class="inline-block"><em>{{comment.whenCreated}}</em></p>
+                    </div>
+                    <div class="col-sm-12 ml-4">
+                        {{comment.content}}
+                    </div>
                 </div>
-            </div>
-            {% for comment in post.has_comments.all reversed %}
-            <div class="row ml-4 mt-4">
-                <div class="col-sm-12 d-flex justify-content-between ">
-                    <p class="inline-block"><strong><a href="{% url 'message_board' comment.creator.id %}">{{comment.creator.first_name}}</a> wrote:</strong></p>
-                    <p class="inline-block"><em>{{comment.whenCreated}}</em></p>
-                </div>
-                <div class="col-sm-12 ml-4">
-                    {{comment.content}}
+                {% endfor %}
+                <div class="row mt-4 ml-4">
+                    <div class="col-sm-12 col-md-12 ml-4">
+                        <form action="{% url 'make_comment' post.id %}" method="POST" id="comment_form_{{post.id}}"
+                            ajax="make_comment">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <textarea class="form-control" name="comment" id="comment" rows="5" style="resize:none;"
+                                    placeholder="make a comment"></textarea>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="row col-sm-12 ml-4 mt-1 d-flex justify-content-end">
+                        <input form="comment_form_{{post.id}}" type="submit"
+                            class="col-sm-12 col-md-2 btn btn-success text-white ml-auto" value="Comment">
+                    </div>
                 </div>
             </div>
             {% endfor %}
-            <div class="row mt-4 ml-4">
-                <div class="col-sm-12 col-md-12 ml-4">
-                    <form action="{% url 'make_comment' post.id %}" method="POST" id="comment_form_{{post.id}}">
-                        {% csrf_token %}
-                        <div class="form-group">
-                            <textarea class="form-control" name="comment" id="comment" rows="5" style="resize:none;" placeholder="make a comment"></textarea>
-                        </div>
-                    </form>
-                </div>
-                <div class="row col-sm-12 ml-4 mt-1 d-flex justify-content-end">
-                    <input form="comment_form_{{post.id}}" type="submit" class="col-sm-12 col-md-2 btn btn-success text-white ml-auto" value="Comment">
-                </div>
-            </div>
         </div>
         <hr>
-        {% endfor %}
     </div>
-    
+
 </body>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
@@ -99,13 +114,25 @@
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-<script>
-
-    
-    $('#message_form').submit(function(e){
+<script type="text/javascript">
+    $('#message_form').submit(function (e) {
         e.preventDefault()
         $.ajax({
             url: "{% url 'make_post' user.id %}",
+            method: "POST",
+            data: $(this).serialize(),
+            success: function (serverResponse) {
+                $("#posts").html(serverResponse)
+            }
+        })
+        $(this).trigger('reset')
+    })
+
+    $('[ajax]').submit(function (e) {
+        e.preventDefault()
+        form_url = $(this).attr("action")
+        $.ajax({
+            url:form_url,
             method: "POST",
             data: $(this).serialize(),
             success:function(serverResponse){
@@ -114,6 +141,6 @@
         })
         $(this).trigger('reset')
     })
-    
 </script>
+
 </html>

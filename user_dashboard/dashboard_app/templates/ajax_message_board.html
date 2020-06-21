@@ -1,5 +1,5 @@
 {% for post in user.board_posts.all reversed %}
-<div class="container posts">
+<div class="container">
     <div class="row">
         <div class="col-sm-12 d-flex justify-content-between">
             <p class="inline-block"><strong><a href="{% url 'message_board' post.creator.id %}">{{post.creator.first_name}} {{post.creator.last_name}}</a> wrote:</strong></p>
@@ -9,7 +9,7 @@
             {{post.content}}
         </div>
     </div>
-    {% for comment in post.has_comments.all reversed %}
+    {% for comment in post.has_comments.all %}
     <div class="row ml-4 mt-4">
         <div class="col-sm-12 d-flex justify-content-between ">
             <p class="inline-block"><strong><a href="{% url 'message_board' comment.creator.id %}">{{comment.creator.first_name}}</a> wrote:</strong></p>
