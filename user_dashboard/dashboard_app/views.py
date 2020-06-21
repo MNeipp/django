@@ -148,3 +148,14 @@ def make_comment(request, post_id):
         current_post = Post.objects.get(id=post_id)
         Comment.objects.create(content = request.POST["comment"], creator = logged_user, post=current_post)
         return redirect(request.META.get('HTTP_REFERER', 'redirect_if_referer_not_found'))
+
+def delete_user(request, user_id):
+    if request.method == "GET":
+        return redirect(reverse("logout"))
+    logged_user = User.objects.get(id=request.session['user_id'])
+    if logged_user.user_level != 9:
+        return redirect(reverse("logout"))
+    else:
+        user_to_delete = User.objects.get(id=user_id)
+        user_to_delete.delete()
+        return redirect(reverse('dashboard'))

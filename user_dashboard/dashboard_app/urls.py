@@ -15,6 +15,7 @@ urlpatterns =[
     path('users/show/<int:user_id>/', db_views.message_board, name="message_board"),
     path('users/show/<int:user_id>/post/', db_views.make_post, name="make_post"),
     path('users/show/<int:post_id>/comment/', db_views.make_comment, name="make_comment"),
+    path('users/<int:user_id>/delete/', db_views.delete_user, name="delete_user"),
     
 
 
