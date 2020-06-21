@@ -117,9 +117,8 @@
 <script type="text/javascript">
     $('#message_form').submit(function (e) {
         e.preventDefault()
-        $.ajax({
+        $.post({
             url: "{% url 'make_post' user.id %}",
-            method: "POST",
             data: $(this).serialize(),
             success: function (serverResponse) {
                 $("#posts").html(serverResponse)
@@ -128,12 +127,11 @@
         $(this).trigger('reset')
     })
 
-    $('[ajax]').submit(function (e) {
+    $('#posts').on('submit', '[ajax]', function (e) {
         e.preventDefault()
         form_url = $(this).attr("action")
-        $.ajax({
+        $.post({
             url:form_url,
-            method: "POST",
             data: $(this).serialize(),
             success:function(serverResponse){
                 $("#posts").html(serverResponse)
