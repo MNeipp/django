@@ -2,7 +2,9 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-12 d-flex justify-content-between">
-            <p class="inline-block"><strong><a href="{% url 'message_board' post.creator.id %}">{{post.creator.first_name}} {{post.creator.last_name}}</a> wrote:</strong></p>
+            <p class="inline-block"><strong><a
+                        href="{% url 'message_board' post.creator.id %}">{{post.creator.first_name}}
+                        {{post.creator.last_name}}</a> wrote:</strong></p>
             <p class="inline-block"><em>{{post.whenCreated}}</em></p>
         </div>
         <div class="col-sm-12 ml-4">
@@ -12,7 +14,9 @@
     {% for comment in post.has_comments.all %}
     <div class="row ml-4 mt-4">
         <div class="col-sm-12 d-flex justify-content-between ">
-            <p class="inline-block"><strong><a href="{% url 'message_board' comment.creator.id %}">{{comment.creator.first_name}}</a> wrote:</strong></p>
+            <p class="inline-block"><strong><a
+                        href="{% url 'message_board' comment.creator.id %}">{{comment.creator.first_name}}</a>
+                    wrote:</strong></p>
             <p class="inline-block"><em>{{comment.whenCreated}}</em></p>
         </div>
         <div class="col-sm-12 ml-4">
@@ -22,15 +26,18 @@
     {% endfor %}
     <div class="row mt-4 ml-4">
         <div class="col-sm-12 col-md-12 ml-4">
-            <form action="{% url 'make_comment' post.id %}" method="POST" id="comment_form_{{post.id}}" ajax="comment_form">
+            <form action="{% url 'make_comment' post.id %}" method="POST" id="comment_form_{{post.id}}"
+                ajax="make_comment">
                 {% csrf_token %}
                 <div class="form-group">
-                    <textarea class="form-control" name="comment" id="comment" rows="5" style="resize:none;" placeholder="make a comment"></textarea>
+                    <textarea class="form-control" name="comment" id="comment" rows="5" style="resize:none;"
+                        placeholder="make a comment"></textarea>
                 </div>
             </form>
         </div>
         <div class="row col-sm-12 ml-4 mt-1 d-flex justify-content-end">
-            <input form="comment_form_{{post.id}}" type="submit" class="col-sm-12 col-md-2 btn btn-success text-white ml-auto" value="Comment">
+            <input form="comment_form_{{post.id}}" type="submit"
+                class="col-sm-12 col-md-2 btn btn-success text-white ml-auto" value="Comment">
         </div>
     </div>
 </div>

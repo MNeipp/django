@@ -17,3 +17,4 @@ user_dashboard/login_app/__pycache__/ -f
 user_dashboard/dashboard_app/__pycache__ -f
 user_dashboard/db.sqlite3 
 
+user_dashboard/db.sqlite3
