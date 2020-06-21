@@ -44,7 +44,7 @@ class userManager(models.Manager):
         elif postData['password'] != postData['confirm_password']:
             errors['confirm'] = "Passwords don't match."
         return errors
-    
+
 
 
 class User(models.Model):
@@ -61,3 +61,6 @@ class User(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     edited_at = models.DateTimeField(auto_now=True)
     objects = userManager()
+
+    def dateCreated(self):
+        return self.created_at.strftime("%B %d, %Y")

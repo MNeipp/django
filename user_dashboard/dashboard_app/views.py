@@ -138,7 +138,11 @@ def make_post(request, user_id):
         logged_user = User.objects.get(id=request.session["user_id"])
         user_board = User.objects.get(id=user_id)
         Post.objects.create(content = request.POST["message"], creator = logged_user, board=user_board)
-        return redirect(request.META.get('HTTP_REFERER', 'redirect_if_referer_not_found'))
+
+    context={
+        "user": user_board,
+    }
+    return render(request, "ajax_message_board.html", context)
 
 def make_comment(request, post_id):
     if request.method == "GET":

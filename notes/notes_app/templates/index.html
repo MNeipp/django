@@ -52,7 +52,7 @@
       console.log("Form submitted but no HTTP request sent to server!");
       $.ajax({
         url: "{% url 'dashboard' %}",
-        method: "post",
+        method: "POST",
         data: $(this).serialize(),
         success: function(serverResponse){
             $("#board").html(serverResponse)
