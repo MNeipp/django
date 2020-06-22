@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.0/yeti/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-chJtTd1EMa6hQI40eyJWF6829eEk4oIe7b3nNtUni7VxA3uHc/uIM/8ppyjrggfV" crossorigin="anonymous">
+        <script src="https://kit.fontawesome.com/0eb52090db.js" crossorigin="anonymous"></script>
     <title>{{user.first_name}}'s Message Board</title>
 </head>
 
@@ -23,7 +24,9 @@
                 <a class="nav-link nav-item active disabled" href="{% url 'message_board' logged_user.id %}"><span
                         class="sr-only">(current)</span>Message Board</a>
             </div>
-            <a class="nav-link text-light" href="{% url 'logout' %}">Log Out</a>
+            <div class="navbar-nav ml-auto">
+                <a class="nav-link nav-item" href="{% url 'logout' %}">Log Out</a>
+            </div>
         </div>
     </nav>
     <br>
@@ -66,17 +69,49 @@
                     <div class="col-sm-12 ml-4">
                         {{post.content}}
                     </div>
+                    <br>
+                    <div class="col-sm-12 ml-4">
+                        {% if logged_user in post.likes.all %}
+                        <form action="{% url 'unlike_post' post.id %}" method='POST' ajax="unlike_post">
+                            {% csrf_token %}
+                             <button type="submit" class="btn btn-info"><i class="fas fa-thumbs-up"></i></button>
+                            <span class="text-info"><em>{{post.numberOfLikes}}</em></span>
+                        {% else %}
+                            <form action="{% url 'like_post' post.id %}" method='POST' ajax="like_post">
+                                {% csrf_token %}
+                                 <button type="submit" class="btn btn-primary"><i class="fas fa-thumbs-up"></i></button>
+                                <span class="text-info"><em>{{post.numberOfLikes}}</em></span>
+                            </form>
+                        {% endif %}
+                    </div>
+
                 </div>
                 {% for comment in post.has_comments.all %}
                 <div class="row ml-4 mt-4">
                     <div class="col-sm-12 d-flex justify-content-between ">
                         <p class="inline-block"><strong><a
-                                    href="{% url 'message_board' comment.creator.id %}">{{comment.creator.first_name}}</a>
+                                    href="{% url 'message_board' comment.creator.id %}">{{comment.creator.first_name}} {{comment.creator.last_name}}</a>
                                 wrote:</strong></p>
                         <p class="inline-block"><em>{{comment.whenCreated}}</em></p>
                     </div>
                     <div class="col-sm-12 ml-4">
                         {{comment.content}}
+                    </div>
+                    <br>
+                    <div class="col-sm-12 ml-4">
+                        {% if logged_user in comment.likes.all %}
+                        <form action="{% url 'unlike_comment' comment.id %}" method='POST' ajax="unlike_comment">
+                            {% csrf_token %}
+                             <button type="submit" class="btn btn-info"><i class="fas fa-thumbs-up"></i></button>
+                            <span class="text-info"><em>{{comment.numberOfLikes}}</em></span>
+                        </form>
+                        {% else %}
+                            <form action="{% url 'like_comment' comment.id %}" method='POST' ajax="like_comment">
+                                {% csrf_token %}
+                                 <button type="submit" class="btn btn-primary"><i class="fas fa-thumbs-up"></i></button>
+                                <span class="text-info"><em>{{comment.numberOfLikes}}</em></span>
+                            </form>
+                        {% endif %}
                     </div>
                 </div>
                 {% endfor %}

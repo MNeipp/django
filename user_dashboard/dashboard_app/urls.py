@@ -16,7 +16,13 @@ urlpatterns =[
     path('users/show/<int:user_id>/post/', db_views.make_post, name="make_post"),
     path('users/show/<int:post_id>/comment/', db_views.make_comment, name="make_comment"),
     path('users/<int:user_id>/delete/', db_views.delete_user, name="delete_user"),
-    
+    path('users/show/<int:post_id>/post/like/', db_views.like_post, name="like_post"),
+    path('users/show/<int:post_id>/post/unlike/', db_views.unlike_post, name="unlike_post"),
+    path('users/show/<int:comment_id>/comment/like/', db_views.like_comment, name="like_comment"),
+    path('users/show/<int:comment_id>/comment/unlike/', db_views.unlike_comment, name="unlike_comment"),
+
+
+
 
 
 ]

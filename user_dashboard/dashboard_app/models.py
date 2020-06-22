@@ -9,6 +9,7 @@ class Post(models.Model):
     content = models.TextField()
     board = models.ForeignKey(User, related_name="board_posts", on_delete=models.CASCADE)
     creator = models.ForeignKey(User, related_name="has_posts", on_delete=models.CASCADE)
+    likes = models.ManyToManyField(User, related_name="liked_posts")
     created_at = models.DateTimeField(auto_now_add=True)
     edited_at = models.DateTimeField(auto_now=True)
 
@@ -62,11 +63,18 @@ class Post(models.Model):
             else:
                 return str(years) + " years ago"
 
+    def numberOfLikes(self):
+        likes = self.likes.all()
+        if len(likes) == 1:
+            return str(len(likes)) + " person likes this"
+        else:
+            return str(len(likes)) + " people like this"
 
 class Comment(models.Model):
     content = models.TextField()
     creator = models.ForeignKey(User, related_name="has_comments", on_delete=models.CASCADE)
     post = models.ForeignKey(Post, related_name="has_comments", on_delete=models.CASCADE)
+    likes = models.ManyToManyField(User, related_name="liked_comments")
     created_at = models.DateTimeField(auto_now_add=True)
     edited_at = models.DateTimeField(auto_now=True)
 
@@ -119,3 +127,10 @@ class Comment(models.Model):
                 return str(years) + " year ago"
             else:
                 return str(years) + " years ago"
+
+    def numberOfLikes(self):
+        likes = self.likes.all()
+        if len(likes) == 1:
+            return str(len(likes)) + " person likes this"
+        else:
+            return str(len(likes)) + " people like this"

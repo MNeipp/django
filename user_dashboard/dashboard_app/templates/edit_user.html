@@ -18,14 +18,14 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarColor01">
             <div class="navbar-nav mr-auto">
-                <a class="nav-link nav-item"
-                    href="{% url 'dashboard' %}">Dashboard</a>
-                <a class="nav-link nav-item active" href="{% url 'profile' %}">Profile</a>
-                    <a class="nav-link nav-item" href="{% url 'message_board' logged_user.id %}">Message Board</a>
+                <a class="nav-link nav-item" href="{% url 'dashboard' %}">Dashboard</a>
+                <a class="nav-link nav-item" href="{% url 'profile' %}">Profile</a>
+                <a class="nav-link nav-item active disabled" href="{% url 'message_board' logged_user.id %}"><span
+                        class="sr-only">(current)</span>Message Board</a>
             </div>
-            <a class="nav-link text-light"
-                href="{% url 'logout' %}">Log
-                Out</a>
+            <div class="navbar-nav ml-auto">
+                <a class="nav-link nav-item" href="{% url 'logout' %}">Log Out</a>
+            </div>
         </div>
     </nav>
     <br>

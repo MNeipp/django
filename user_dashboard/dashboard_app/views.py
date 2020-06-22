@@ -169,3 +169,55 @@ def delete_user(request, user_id):
         user_to_delete = User.objects.get(id=user_id)
         user_to_delete.delete()
         return redirect(reverse('dashboard'))
+
+def like_post(request, post_id):
+    if request.method == "GET":
+        return redirect (reverse ("logout"))
+    else:
+        logged_user = User.objects.get(id=request.session['user_id'])
+        liked_post = Post.objects.get(id=post_id)
+        liked_post.likes.add(logged_user)
+        context={
+            "user": User.objects.get(id=liked_post.board.id),
+            "logged_user": logged_user,
+        }
+        return render(request, "ajax_message_board.html", context)
+
+def like_comment(request, comment_id):
+    if request.method == "GET":
+        return redirect (reverse ("logout"))
+    else:
+        logged_user = User.objects.get(id=request.session['user_id'])
+        liked_comment = Comment.objects.get(id=comment_id)
+        liked_comment.likes.add(logged_user)
+        context={
+            "user": User.objects.get(id=liked_comment.post.board.id),
+            "logged_user": logged_user,
+        }
+        return render(request, "ajax_message_board.html", context)
+
+def unlike_post(request, post_id):
+    if request.method == "GET":
+        return redirect (reverse ("logout"))
+    else:
+        logged_user = User.objects.get(id=request.session['user_id'])
+        liked_post = Post.objects.get(id=post_id)
+        liked_post.likes.remove(logged_user)
+        context={
+            "user": User.objects.get(id=liked_post.board.id),
+            "logged_user": logged_user,
+        }
+    return render(request, "ajax_message_board.html", context)
+
+def unlike_comment(request, comment_id):
+    if request.method == "GET":
+        return redirect (reverse ("logout"))
+    else:
+        logged_user = User.objects.get(id=request.session['user_id'])
+        liked_comment = Comment.objects.get(id=comment_id)
+        liked_comment.likes.remove(logged_user)
+        context ={
+            "user": User.objects.get(id=liked_comment.post.board.id),
+            "logged_user": logged_user,
+        }
+    return render(request, "ajax_message_board.html", context)
