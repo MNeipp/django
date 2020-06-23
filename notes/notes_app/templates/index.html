@@ -18,10 +18,18 @@
             <div class="d-flex flex-wrap col-12">
                 {% for note in notes %}
                 <div class="card bg-primary text-white col-3 p-0 mx-1 my-3">
-                    <div class="card-header">
+                    <div class="card-header d-flex justify-content-between">
                         <h3>{{note.title}}</h3>
+                        <form action="{% url 'delete_note' note.id %}" id="delete_note_{{note.id}}" method="POST">
+                            {% csrf_token %}
+                            <button class="btn btn-outline text-white p-0" form="delete_note_{{note.id}}">X</button>
+                        </form>
                     </div>
                     <div class="card-body">
+                        <form action="{% url 'update_content' note.id %}" id="update_content_{{note.id}}" method="POST">
+                            {%csrf_token%}
+                            <input id="txtBox" type="textbox" value="{{note.content}}" style="display:none;" name ="content" note_id="{{note.id}}">
+                        </form>
                         <p class="card-text">{{note.content}}</p>
                     </div>
                 </div>
@@ -31,7 +39,7 @@
 
         <div class="container my-5">
             <h3>New Note</h3>
-            <form action="{% url 'dashboard' %}" method="POST">
+            <form action="{% url 'dashboard' %}" method="POST" id="new_note">
                 {% csrf_token %}
                 <div class="form-group">
                     <label for="title" class="col-form-label col-form-label-lg">Title</label>
@@ -47,9 +55,8 @@
     </div>
 </body>
 <script>
-    $('form').submit(function(e){
+    $('#new_note').submit(function(e){
       e.preventDefault();
-      console.log("Form submitted but no HTTP request sent to server!");
       $.ajax({
         url: "{% url 'dashboard' %}",
         method: "POST",
@@ -58,7 +65,41 @@
             $("#board").html(serverResponse)
         }
       })
+      $(this).trigger('reset')
     });
+
+    $('#board').on('click','p', function(e){
+        $(this).hide();
+        $(this).siblings().children().show();
+    })
+    $('#board').on('blur', 'input', function(e){
+        form_url = $(this).parent().attr('action')
+        $.post({ 
+            url:form_url,
+            data: $(this).serialize(),
+            success: function(serverResponse){
+                $("#board").html(serverResponse)
+            }
+        })
+        $(this).hide();
+        $(this).parent().siblings().show();
+    })
+
+    $('#board').on('click','button', (function(e){
+      form_url = $(this).parent().attr('action')
+      e.preventDefault();
+      console.log($(this))
+      $.post({
+        url: form_url,
+        data: $(this).serialize(),
+        success: function(serverResponse){
+            $("#board").html(serverResponse)
+        }
+      })
+
+    }))
+    
+
   </script>
 
 </html>

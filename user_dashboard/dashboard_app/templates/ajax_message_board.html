@@ -15,12 +15,12 @@
             {% if logged_user in post.likes.all %}
             <form action="{% url 'unlike_post' post.id %}" method='POST' ajax="unlike_post">
                 {% csrf_token %}
-                 <button type="submit" class="btn btn-info"  data-toggle="tooltip" data-placement="right" data-html="true" title="{% for user in post.likes.all %}{{user.first_name }}{{user.last_name}}{% endfor %}"><i class="fas fa-thumbs-up"></i></button>
+                 <button type="submit" class="btn btn-info"  data-toggle="tooltip" data-placement="right" title="{% for user in post.likes.all %} {{user.first_name }} {{user.last_name}} {% endfor %}"><i class="fas fa-thumbs-up"></i></button>
                 <span class="text-info"><em>{{post.numberOfLikes}}</em></span>
             {% else %}
                 <form action="{% url 'like_post' post.id %}" method='POST' ajax="like_post">
                     {% csrf_token %}
-                     <button type="submit" class="btn btn-primary"  data-toggle="tooltip" data-placement="right" data-html="true" title="{% for user in post.likes.all %}{{user.first_name }}{{user.last_name}}{% endfor %}"><i class="fas fa-thumbs-up"></i></button>
+                     <button type="submit" class="btn btn-primary"  data-toggle="tooltip" data-placement="right"  title="{% for user in post.likes.all %} {{user.first_name }} {{user.last_name}} {% endfor %}"><i class="fas fa-thumbs-up"></i></button>
                     <span class="text-info"><em>{{post.numberOfLikes}}</em></span>
                 </form>
             {% endif %}
@@ -43,13 +43,13 @@
             {% if logged_user in comment.likes.all %}
             <form action="{% url 'unlike_comment' comment.id %}" method='POST' ajax="unlike_comment">
                 {% csrf_token %}
-                 <button type="submit" class="btn btn-info"  data-toggle="tooltip" data-placement="right" data-html="true" title="{% for user in comment.likes.all %}{{user.first_name }}{{user.last_name}}{% endfor %}"><i class="fas fa-thumbs-up"></i></button>
+                 <button type="submit" class="btn btn-info"  data-toggle="tooltip" data-placement="right" data-html="true" title="{% for user in comment.likes.all %}{{user.first_name }} {{user.last_name}}{% endfor %}"><i class="fas fa-thumbs-up"></i></button>
                 <span class="text-info"><em>{{comment.numberOfLikes}}</em></span>
             </form>
             {% else %}
                 <form action="{% url 'like_comment' comment.id %}" method='POST' ajax="like_comment">
                     {% csrf_token %}
-                     <button type="submit" class="btn btn-primary"  data-toggle="tooltip" data-placement="right" data-html="true" title="{% for user in comment.likes.all %}{{user.first_name }}{{user.last_name}}{% endfor %}"><i class="fas fa-thumbs-up"></i></button>
+                     <button type="submit" class="btn btn-primary"  data-toggle="tooltip" data-placement="right" data-html="true" title="{% for user in comment.likes.all %}{{user.first_name }} {{user.last_name}}{% endfor %}"><i class="fas fa-thumbs-up"></i></button>
                     <span class="text-info"><em>{{comment.numberOfLikes}}</em></span>
                 </form>
             {% endif %}

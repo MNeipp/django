@@ -2,10 +2,18 @@
     <div class="d-flex flex-wrap col-12">
         {% for note in notes %}
         <div class="card bg-primary text-white col-3 p-0 mx-1 my-3">
-            <div class="card-header">
+            <div class="card-header d-flex justify-content-between">
                 <h3>{{note.title}}</h3>
+                <form action="{% url 'delete_note' note.id %}" id="delete_note_{{note.id}}" method="POST">
+                    {% csrf_token %}
+                    <button class="btn btn-outline text-white p-0" form="delete_note_{{note.id}}">X</button>
+                </form>
             </div>
             <div class="card-body">
+                <form action="{% url 'update_content' note.id %}" id="update_content_{{note.id}}" method="POST">
+                    {%csrf_token%}
+                    <input id="txtBox" type="textbox" value="{{note.content}}" style="display:none;" name ="content" note_id="{{note.id}}">
+                </form>
                 <p class="card-text">{{note.content}}</p>
             </div>
         </div>
