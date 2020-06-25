@@ -13,15 +13,28 @@ class Post(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     edited_at = models.DateTimeField(auto_now=True)
 
+    def canDelete(self):
+        now = timezone.now()
+        diff = now - self.created_at
+
+        if diff.days >= 0 and diff.seconds >=60 and diff.seconds < 3600:
+            minutes = math.floor(diff.seconds/60)
+            if minutes <= 15:
+                return True
+            else: 
+                return False
+        else:
+            return False
+
     def whenCreated(self):
         now = timezone.now()
-        diff= now - self.created_at
+        diff = now - self.created_at
 
         # seconds/minutes/hours
         if diff.days == 0 and diff.seconds >= 0 and diff.seconds < 60:
             seconds= diff.seconds
             if seconds == 1:
-                return str(seconds) +  "second ago"
+                return str(seconds) +  " second ago"
             else:
                 return str(seconds) + " seconds ago"
 
@@ -78,6 +91,19 @@ class Comment(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     edited_at = models.DateTimeField(auto_now=True)
 
+    def canDelete(self):
+        now = timezone.now()
+        diff = now - self.created_at
+
+        if diff.days >= 0 and diff.seconds >=60 and diff.seconds < 3600:
+            minutes = math.floor(diff.seconds/60)
+            if minutes <= 15:
+                return True
+            else: 
+                return False
+        else:
+            return False
+
     def whenCreated(self):
         now = timezone.now()
         diff= now - self.created_at
@@ -86,7 +112,7 @@ class Comment(models.Model):
         if diff.days == 0 and diff.seconds >= 0 and diff.seconds < 60:
             seconds= diff.seconds
             if seconds == 1:
-                return str(seconds) +  "second ago"
+                return str(seconds) +  " second ago"
             else:
                 return str(seconds) + " seconds ago"
 

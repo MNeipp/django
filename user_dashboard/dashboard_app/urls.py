@@ -20,6 +20,8 @@ urlpatterns =[
     path('users/show/<int:post_id>/post/unlike/', db_views.unlike_post, name="unlike_post"),
     path('users/show/<int:comment_id>/comment/like/', db_views.like_comment, name="like_comment"),
     path('users/show/<int:comment_id>/comment/unlike/', db_views.unlike_comment, name="unlike_comment"),
+    path('users/post/delete/', db_views.delete_post, name="delete_post"),
+    path('users/comment/delete/', db_views.delete_comment, name="delete_comment"),
 
 
 

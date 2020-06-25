@@ -224,3 +224,21 @@ def unlike_comment(request, comment_id):
             "logged_user": logged_user,
         }
     return render(request, "ajax_message_board.html", context)
+
+def delete_post(request):
+    if request.method == "POST":
+        user_id = request.session['user_id']
+        post = Post.objects.get(id=request.POST['post_id'])
+        post.delete()
+        return redirect(reverse('message_board', args=(user_id,)))
+    else:
+        return redirect(request.META.get('HTTP_REFERER', 'redirect_if_referer_not_found'))
+
+def delete_comment(request):
+    if request.method == "POST":
+        user_id = request.session['user_id']
+        comment = Comment.objects.get(id=request.POST['comment_id'])
+        comment.delete()
+        return redirect(reverse('message_board', args=(user_id,)))
+    else:
+        return redirect(request.META.get('HTTP_REFERER', 'redirect_if_referer_not_found'))
