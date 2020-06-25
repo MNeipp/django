@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, reverse
+from django.views.decorators.csrf import csrf_exempt
 from django.contrib import messages
 from .models import User
 import bcrypt
@@ -18,14 +19,24 @@ def signin(request):
 def register(request):
     return render(request, "register.html")
 
+@csrf_exempt
+def ajax_process(request):
+    errors = User.objects.basic_validator(request.POST)
+    if len(errors) > 0:
+        for key,value in errors.items():
+            messages.error(request,value, extra_tags=key)
+        return render(request, "snippets/register_snippet.html")
+
+
 def process(request):
     errors = User.objects.basic_validator(request.POST)
     if len(errors) > 0:
         for key,value in errors.items():
             messages.error(request,value, extra_tags=key)
         if "user_id" in request.session:
-            logged_user = User.objects.get(id=request.session['user_id'])
-            return render(request, "snippets/register_snippet.html", {'logged_user':logged_user})
+            return redirect(reverse("new_user"))
+        else:
+            return redirect(reverse("register"))
     else:
         users = User.objects.all()
         if len(users) < 1:

@@ -43,7 +43,7 @@
                         </div>
                         <div class="form-group">
                             <label for="first_name" class="col-form-label">First Name:</label>
-                            <input type="text" class="form-control col-sm-9" name="first_name" id="last_name">
+                            <input type="text" class="form-control col-sm-9" name="first_name" id="first_name">
                             {% for message in messages %}
                                 {% if "first_name" in message.extra_tags %}
                                     <p class="text-danger"><small>{{message}}</small></p>

@@ -43,44 +43,26 @@
                         <label for="email" class="col-form-label">Email:</label>
                         <input type="email" class="form-control col-sm-9" name="email" id="email">
                         <div id="email_error">
-                            {% for message in messages %}
-                            {% if "email" in message.extra_tags %}
-                            <p class="text-danger"><small>{{message}}</small></p>
-                            {% endif %}
-                            {% endfor %}
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="first_name" class="col-form-label">First Name:</label>
                         <input type="text" class="form-control col-sm-9" name="first_name" id="first_name">
                         <div id="first_name_error">
-                            {% for message in messages %}
-                            {% if "first_name" in message.extra_tags %}
-                            <p class="text-danger"><small>{{message}}</small></p>
-                            {% endif %}
-                            {% endfor %}
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="last_name" class="col-form-label">Last Name:</label>
                         <input type="text" class="form-control col-sm-9" name="last_name" id="last_name">
                         <div id="last_name_error">
-                            {% for message in messages %}
-                            {% if "last_name" in message.extra_tags %}
-                            <p class="text-danger"><small>{{message}}</small></p>
-                            {% endif %}
-                            {% endfor %}
+
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="password" class="col-form-label">Password:</label>
                         <input type="password" class="form-control col-sm-9" name="password" id="password">
                         <div id="password_error">
-                            {% for message in messages %}
-                            {% if "password" in message.extra_tags %}
-                            <p class="text-danger"><small>{{message}}</small></p>
-                            {% endif %}
-                            {% endfor %}
+
                         </div>
                     </div>
                     <div class="form-group">
@@ -114,16 +96,16 @@
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
 </script>
 
-<script>
+<script type="text/javascript">
     $('input').keyup(function (e) {
         $.ajax({
-            type: "GET",
-            url: $('#new_form').attr("action"),
+            type: "POST",
+            url: "{% url 'ajax_process'%}",
             data: $('#new_form').serialize(),
             success: function (response) {
                 console.log(response)
-                var email_error = $(response).filter('#email_error');
-                $('#email_error').html(email_error);
+                var em_error = $(response).filter('#email_error');
+                $('#email_error').html(em_error);
                 var fn_error = $(response).filter('#first_name_error');
                 $('#first_name_error').html(fn_error);
                 var ln_error = $(response).filter('#last_name_error')
