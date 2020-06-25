@@ -69,7 +69,7 @@
                     <div class="col-sm-12 ml-4 d-flex justify-content-between">
                         <p class="inline-block">{{post.content}}</p>
                         {% if post.canDelete == True %}
-                        <form action="{% url 'delete_post' %}" method="POST">
+                        <form action="{% url 'delete_post' user.id %}" method="POST" ajax="delete_post">
                             {% csrf_token %}
                             <input type="hidden" name="post_id" value="{{post.id}}">
                             <button type="submit" class="btn btn-warning btn-sm ">Delete Post</button>
@@ -110,7 +110,7 @@
                     <div class="col-sm-12 ml-4 d-flex justify-content-between">
                         <p class="inline-block">{{comment.content}}</p>
                         {% if comment.canDelete == True %}
-                        <form action="{% url 'delete_comment' %}" method="POST">
+                        <form action="{% url 'delete_comment' user.id %}" method="POST" ajax="delete_comment">
                             {% csrf_token %}
                             <input type="hidden" name="comment_id" value="{{comment.id}}">
                             <button type="submit" class="btn btn-warning btn-sm ">Delete Comment</button>

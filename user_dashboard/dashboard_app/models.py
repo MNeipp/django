@@ -17,7 +17,7 @@ class Post(models.Model):
         now = timezone.now()
         diff = now - self.created_at
 
-        if diff.days >= 0 and diff.seconds >=60 and diff.seconds < 3600:
+        if diff.days >= 0 and diff.seconds < 3600:
             minutes = math.floor(diff.seconds/60)
             if minutes <= 15:
                 return True
@@ -95,7 +95,7 @@ class Comment(models.Model):
         now = timezone.now()
         diff = now - self.created_at
 
-        if diff.days >= 0 and diff.seconds >=60 and diff.seconds < 3600:
+        if diff.days >= 0 and diff.seconds < 3600:
             minutes = math.floor(diff.seconds/60)
             if minutes <= 15:
                 return True
