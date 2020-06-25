@@ -73,7 +73,7 @@ def new_user(request):
     if logged_user.user_level != 9:
         return redirect(reverse('dashboard'))
     else:
-        return render(request, "add.html")
+        return render(request, "add.html", {'logged_user':logged_user})
 
 def edit_user(request, user_id):
     if "user_id" not in request.session:
@@ -143,7 +143,7 @@ def make_post(request, user_id):
     context={
         "user": user_board,
     }
-    return render(request, "ajax_message_board.html", context)
+    return render(request, "snippets/ajax_message_board.html", context)
 
 def make_comment(request, post_id):
     if request.method == "GET":
@@ -157,7 +157,7 @@ def make_comment(request, post_id):
     context={
         "user": user,
     }
-    return render(request, "ajax_message_board.html", context)
+    return render(request, "snippets/ajax_message_board.html", context)
 
 def delete_user(request, user_id):
     if request.method == "GET":
@@ -184,7 +184,7 @@ def like_post(request, post_id):
             "user": User.objects.get(id=liked_post.board.id),
             "logged_user": logged_user,
         }
-        return render(request, "ajax_message_board.html", context)
+        return render(request, "snippets/ajax_message_board.html", context)
 
 def like_comment(request, comment_id):
     if request.method == "GET":
@@ -197,7 +197,7 @@ def like_comment(request, comment_id):
             "user": User.objects.get(id=liked_comment.post.board.id),
             "logged_user": logged_user,
         }
-        return render(request, "ajax_message_board.html", context)
+        return render(request, "snippets/ajax_message_board.html", context)
 
 def unlike_post(request, post_id):
     if request.method == "GET":
@@ -210,7 +210,7 @@ def unlike_post(request, post_id):
             "user": User.objects.get(id=liked_post.board.id),
             "logged_user": logged_user,
         }
-    return render(request, "ajax_message_board.html", context)
+    return render(request, "snippets/ajax_message_board.html", context)
 
 def unlike_comment(request, comment_id):
     if request.method == "GET":
@@ -223,7 +223,7 @@ def unlike_comment(request, comment_id):
             "user": User.objects.get(id=liked_comment.post.board.id),
             "logged_user": logged_user,
         }
-    return render(request, "ajax_message_board.html", context)
+    return render(request, "snippets/ajax_message_board.html", context)
 
 def delete_post(request, user_id):
     if request.method == "POST":
@@ -233,7 +233,7 @@ def delete_post(request, user_id):
             "user": User.objects.get(id=user_id),
             "logged_user": User.objects.get(id=request.session['user_id'])
         }
-        return render(request, "ajax_message_board.html", context)
+        return render(request, "snippets/ajax_message_board.html", context)
     else:
         return redirect(request.META.get('HTTP_REFERER', 'redirect_if_referer_not_found'))
 
@@ -245,6 +245,6 @@ def delete_comment(request, user_id):
             "user": User.objects.get(id=user_id),
             "logged_user": User.objects.get(id=request.session['user_id'])
         }
-        return render(request, "ajax_message_board.html", context)
+        return render(request, "snippets/ajax_message_board.html", context)
     else:
         return redirect(request.META.get('HTTP_REFERER', 'redirect_if_referer_not_found'))

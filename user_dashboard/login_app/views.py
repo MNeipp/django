@@ -25,12 +25,7 @@ def process(request):
             messages.error(request,value, extra_tags=key)
         if "user_id" in request.session:
             logged_user = User.objects.get(id=request.session['user_id'])
-            if logged_user.user_level == 9:
-                return redirect(reverse("new_user"))
-            else:
-                return redirect(reverse('register'))
-        else:
-            return redirect(reverse('register'))
+            return render(request, "snippets/register_snippet.html", {'logged_user':logged_user})
     else:
         users = User.objects.all()
         if len(users) < 1:
