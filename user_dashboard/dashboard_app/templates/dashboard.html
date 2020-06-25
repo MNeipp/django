@@ -29,6 +29,12 @@
 </nav>
     <br>
     <div class="container">
+      {% if messages %}
+        {% for message in messages %}
+          <p class="text-danger">{{message}}</p>
+        {% endfor %}
+      {% endif %}
+
       <div class="row d-flex">
         {% if logged_user.user_level == 9 %}
         <h2 class="mb-4 ml-3">Manage Users</h2>

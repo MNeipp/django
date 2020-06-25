@@ -165,6 +165,9 @@ def delete_user(request, user_id):
     logged_user = User.objects.get(id=request.session['user_id'])
     if logged_user.user_level != 9:
         return redirect(reverse("logout"))
+    elif logged_user.id == user_id:
+        messages.error(request, "You can not delete yourself", extra_tags="delete")
+        return redirect(reverse('dashboard'))
     else:
         user_to_delete = User.objects.get(id=user_id)
         user_to_delete.delete()
