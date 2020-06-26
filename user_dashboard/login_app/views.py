@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, reverse
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib import messages
 from .models import User
-import bcrypt
+import bcrypt, json
 
 
 # Create your views here.

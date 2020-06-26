@@ -2,7 +2,8 @@ from django.shortcuts import render, redirect, reverse, HttpResponse
 from login_app.models import User
 from django.contrib import messages
 from .models import Post, Comment
-import bcrypt
+import bcrypt, json
+
 
 # Create your views here.
 
